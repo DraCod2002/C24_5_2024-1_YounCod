@@ -5,32 +5,41 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.pedro.hernandez.buscam.Opciones_login.Login_email
 import com.pedro.hernandez.buscam.databinding.ActivityRegistroEmailBinding
-import org.intellij.lang.annotations.Pattern
-
 
 class Registro_email : AppCompatActivity() {
-    private lateinit var binding : ActivityRegistroEmailBinding
 
-    private lateinit var firebaseAuth : FirebaseAuth
-    private lateinit var progreDoalog: ProgressDialog
+    private lateinit var binding: ActivityRegistroEmailBinding
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var progressDialog: ProgressDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityRegistroEmailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.TxtIngresar.setOnClickListener{
-            startActivity(Intent(this@Registro_email, Login_email::class.java))
-        }
-        firebaseAuth = FirebaseAuth.getInstance()
-        progreDoalog = ProgressDialog(this)
-        progreDoalog.setTitle("Espere por favor")
-        progreDoalog.setCanceledOnTouchOutside(false)
 
-        binding.BtnRegistrar.setOnClickListener{
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Espere por favor")
+        progressDialog.setCanceledOnTouchOutside(false)
+
+
+
+
+
+
+
+        binding.BtnRegistrar.setOnClickListener {
             validarInfo()
         }
     }
@@ -38,28 +47,30 @@ class Registro_email : AppCompatActivity() {
     private var password = ""
     private var r_password = ""
     private fun validarInfo() {
-        email = binding.TxtEmail.text.toString().trim()
-        password = binding.TxtPassword.text.toString().trim()
-        r_password = binding.TxtRPassword.text.toString().trim()
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.TxtEmail.error = "Email inválido"
-            binding.TxtEmail.requestFocus()
+        email = binding.EtEmail.text.toString().trim()
+        password = binding.EtPassword.text.toString().trim()
+        r_password = binding.EtRPassword.text.toString().trim()
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+           binding.EtEmail.error = "Email invalido"
+           binding.EtEmail.requestFocus()
         }
-        else if(email.isEmpty()){
-            binding.TxtEmail.error = "Ingrese email"
-            binding.TxtEmail.requestFocus()
+        else if (email.isEmpty()){
+            binding.EtEmail.error = "Ingrese email"
+            binding.EtEmail.requestFocus()
         }
-        else if(password.isEmpty()){
-            binding.TxtPassword.error = "Ingrese contraseña"
-            binding.TxtPassword.requestFocus()
+        else if (password.isEmpty()){
+            binding.EtPassword.error = "Ingrese contraseña"
+            binding.EtPassword.requestFocus()
         }
-        else if(r_password.isEmpty()){
-            binding.TxtRPassword.error = "Repite la contraseña"
-            binding.TxtRPassword.requestFocus()
+        else if (r_password.isEmpty()){
+            binding.EtRPassword.error = "Repita Contraseña"
+            binding.EtRPassword.requestFocus()
         }
-        else if(password != r_password){
-            binding.TxtRPassword.error = "No coincide"
-            binding.TxtRPassword.requestFocus()
+        else if (password != r_password){
+            binding.EtRPassword.error = "No coinciden las contraseñas"
+            binding.EtRPassword.requestFocus()
+
         }
         else{
             registrarUsuario()
@@ -67,25 +78,25 @@ class Registro_email : AppCompatActivity() {
     }
 
     private fun registrarUsuario() {
-        progreDoalog.setMessage("Creando cuenta")
-        progreDoalog.show()
-
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+        progressDialog.setMessage("Creando Cuenta")
+        progressDialog.show()
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
             .addOnSuccessListener {
                 llenarInfoBD()
             }
             .addOnFailureListener{e->
-                progreDoalog.dismiss()
+                progressDialog.dismiss()
                 Toast.makeText(
-                    this,
-                    "No se registro el usuario debido a ${e.message}",
+                    this,"No se registro el usuario  debido a ${e.message}",
                     Toast.LENGTH_SHORT).show()
+
             }
     }
 
-    private fun llenarInfoBD(){
-        progreDoalog.setMessage("Guardando información")
-        val tiempo = Constantes.ontenerTiempoDis()
+    private fun llenarInfoBD() {
+        progressDialog.setMessage("Guardando Información")
+
+        val tiempo = Constantes.obtenerTiempoDis()
         val emailUsuario = firebaseAuth.currentUser!!.email
         val uidUsuario = firebaseAuth.uid
 
@@ -97,7 +108,7 @@ class Registro_email : AppCompatActivity() {
         hashMap["proveedor"] = "Email"
         hashMap["escribiendo"] = ""
         hashMap["tiempo"] = tiempo
-        hashMap["online"] =  true
+        hashMap["online"] = true
         hashMap["email"] = "${emailUsuario}"
         hashMap["uid"] = "${uidUsuario}"
         hashMap["fecha_nac"] = ""
@@ -106,15 +117,16 @@ class Registro_email : AppCompatActivity() {
         ref.child(uidUsuario!!)
             .setValue(hashMap)
             .addOnSuccessListener {
-                progreDoalog.dismiss()
-                startActivity(Intent(this, MainActivity::class.java))
+                progressDialog.dismiss()
+                startActivity(Intent(this,MainActivity::class.java))
                 finishAffinity()
             }
-            .addOnFailureListener{e->
-                progreDoalog.dismiss()
+
+            .addOnFailureListener{ e->
+                progressDialog.dismiss()
                 Toast.makeText(
                     this,
-                    "No se registró debido a ${e.message}",
+                    "No se registro debido a ${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()
             }

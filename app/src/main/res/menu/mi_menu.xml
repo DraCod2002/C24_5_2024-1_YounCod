@@ -3,26 +3,18 @@
     <item
         android:id="@+id/Item_Inicio"
         android:title="@string/Item_Inicio"
-        android:icon="@drawable/ic_inicio"/>
-
-    <item
-        android:id="@+id/Item_Anuncios"
-        android:title="@string/Item_Anuncios"
-        android:icon="@drawable/ic_anuncios"/>
-    <item
-        android:id="@+id/Item_Buscar"
+        android:icon="@drawable/ic_home"
+        />
+    <item android:id="@+id/Item_Favoritos"
+        android:title="@string/Item_Favoritos"
+        android:icon="@drawable/ic_favorites"/>
+    <item android:id="@+id/Item_Buscar"
         android:title="@string/Item_Buscar"
         android:enabled="false"/>
-
-    <item
-        android:id="@+id/Item_Chats"
+    <item android:id="@+id/Item_Chats"
         android:title="@string/Item_Chats"
         android:icon="@drawable/ic_chats"/>
-    <item
-        android:id="@+id/Item_Perfil"
+    <item android:id="@+id/Item_Perfil"
         android:title="@string/Item_Perfil"
         android:icon="@drawable/ic_perfil"/>
-
-
-
 </menu>

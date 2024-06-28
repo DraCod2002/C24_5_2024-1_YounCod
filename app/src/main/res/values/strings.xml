@@ -1,53 +1,89 @@
 <resources>
     <string name="app_name">Buscam</string>
 
-    <string name="default_web_client_id">97834713505-3lpsrvrvs5nnl1jeuctddal9pbs7uboe.apps.googleusercontent.com</string>
     <string name="Item_Inicio">Inicio</string>
-    <string name="Item_Anuncios">Anuncios</string>
-    <string name="Item_Buscar">Buscar</string>
+    <string name="Item_Favoritos">Favoritos</string>
+    <string name="Item_Buscar"></string>
     <string name="Item_Chats">Chats</string>
     <string name="Item_Perfil">Perfil</string>
-    <string name="TituloRl">Título</string>
-    <string name="Ingresar_email">Ingresa con Correo</string>
-    <string name="Ingresar_google">Ingresa con Google</string>
-    <string name="Bienvenido">Bienvenido a Buscam</string>
-    <string name="descripcion">Ingresa a buscam y encuentra todo lo que buscas</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="Txt_login_email">Correo electrónico</string>
-    <string name="Txt_login_password">Contraseña</string>
-    <string name="Txt_email">Ingresa tu correo</string>
-    <string name="Txt_password">Ingresa tu contraseña</string>
-    <string name="Btn_ingresar">Iniciar sesión</string>
-    <string name="Txt_no_cuenta">¿No tienes una cuénta?</string>
-    <string name="Txt_registrarme">Registrarse</string>
-    <string name="Txt_registro">Empieza Ahora</string>
-    <string name="Txt_r_password">Repetir Contraseña</string>
+    <string name="TituloRl">Titulo</string>
+    <string name="Ingresar_email">Ingresar con email</string>
+    <string name="Ingresar_google">Ingresar con google</string>
+    <string name="Txt_login">Login de Usuario</string>
+    <string name="Et_email">Email</string>
+    <string name="Et_password">Contraseña</string>
+    <string name="Btn_ingresar">Ingresar</string>
+    <string name="Txt_no_cuenta">No tienes una cuenta</string>
+    <string name="Txt_Registrarme">REGISTRARME</string>
+
+    <string name="Txt_Registro">Registro de Usuario</string>
+    <string name="Et_r_password">Repetir Contraseña</string>
     <string name="Btn_registrar">Registrar</string>
-    <string name="Txt_si_cuenta">¿Ya tienes una cuenta?</string>
-    <string name="Txt_ingresar">Ingresar</string>
-    <string name="Btn_cerrar_sesion">Cerrar sesión</string>
-    <!--Perlfil de usuario-->
-    <string name="Btn_editar_perfil">Editar Perfil</string>
-    <string name="Btn_vender">Vender</string>
-    <string name="Tv_nombres">Pedro Hernandez</string>
-    <string name="Txt_informacion">Información</string>
-    <string name="Txt_email_info">Email: </string>
+
+    <!--Perfil de Usuario-->
+    <string name="Txt_perfil">Perfil de Usuario</string>
+    <string name="Txt_informacion">Informacion: </string>
+    <string name="Txt_nombres">Nombres: </string>
+    <string name="Tv_nombres">Nombres completos</string>
+    <string name="Txt_email">Email :</string>
     <string name="Tv_email">email@dominio.com</string>
-    <string name="txt_nacimiento">Fecha de nacimiento: </string>
+    <string name="Txt_nacimiento">Fecha de nac: </string>
     <string name="Tv_nacimiento">dd/mm/aaaa</string>
-    <string name="txt_miembro">Miembro desde: </string>
+    <string name="Txt_miembro">Miembro desde: </string>
     <string name="Tv_miembro">dd/mm/aaaa</string>
-    <string name="Txt_telefono">Teléfono: </string>
+    <string name="Txt_telefono">Telefono: </string>
     <string name="Tv_telefono">999999999</string>
-    <string name="Txt_estado_cuenta">Estado de cuenta:</string>
+    <string name="Txt_estado_cuenta">Estado de cuenta: </string>
     <string name="Tv_estado_cuenta">No verificado</string>
-    <string name="Txt_anuncios">Anuncios</string>
-    <!-- Editar perfil usuario-->
-    <string name="Txt_editar_p">Editar Perfil</string>
-    <string name="Txt_nombres_c">Nombres Y Apellidos</string>
-    <string name="Et_nombres">Ingresa aquí</string>
-    <string name="Txt_f_nac">Fecha de nacimiento</string>
-    <string name="Et_f_nac">Ingresa aquí</string>
-    <string name="Et_telefono">Ingresa aquí</string>
-    <string name="Btn_actualizar">Actualizar</string>
+
+    <string name="TxtOpciones">Opciones</string>
+    <string name="Btn_editar_perfil">Editar Perfil</string>
+
+    <string name="Btn_cerrar_sesion">Cerrar Sesión</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+
 </resources>

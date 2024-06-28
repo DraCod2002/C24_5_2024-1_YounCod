@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "97834713505",
-    "firebase_url": "https://buscamv1-9c23b-default-rtdb.firebaseio.com",
-    "project_id": "buscamv1-9c23b",
-    "storage_bucket": "buscamv1-9c23b.appspot.com"
+    "project_number": "667949746525",
+    "firebase_url": "https://app-compra-y-venta-236ae-default-rtdb.firebaseio.com",
+    "project_id": "app-compra-y-venta-236ae",
+    "storage_bucket": "app-compra-y-venta-236ae.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:97834713505:android:47c3ad79e9188835334be0",
+        "mobilesdk_app_id": "1:667949746525:android:c26e38e284085f0aeac0b4",
         "android_client_info": {
           "package_name": "com.pedro.hernandez.buscam"
         }
       },
       "oauth_client": [
         {
-          "client_id": "97834713505-311t9hqoj0qqd6ciriq3jjm41sv7cbrs.apps.googleusercontent.com",
+          "client_id": "667949746525-gq1ln2e25nkbnf4ovh7607vtqbgn6uhv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pedro.hernandez.buscam",
-            "certificate_hash": "dcb5ed983786dece386ae8f1a73fef916130d8ef"
+            "certificate_hash": "4acf3d280c1f57606687db1f61e40a946f4ee8f9"
           }
         },
         {
-          "client_id": "97834713505-3lpsrvrvs5nnl1jeuctddal9pbs7uboe.apps.googleusercontent.com",
+          "client_id": "667949746525-kir8c797o8s42j692bectns74dlnggsc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB2D6gYbM0pjwzgiU38p_Im_XQTu5Gjcu4"
+          "current_key": "AIzaSyCAJ0alP-4Xb5udKC0poBKzpqrHaxYmhDc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "97834713505-3lpsrvrvs5nnl1jeuctddal9pbs7uboe.apps.googleusercontent.com",
+              "client_id": "667949746525-kir8c797o8s42j692bectns74dlnggsc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
