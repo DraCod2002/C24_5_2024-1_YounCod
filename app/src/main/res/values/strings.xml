@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Buscam</string>
+
+    <string name="default_web_client_id">97834713505-3lpsrvrvs5nnl1jeuctddal9pbs7uboe.apps.googleusercontent.com</string>
+    <string name="Item_Inicio">Inicio</string>
+    <string name="Item_Anuncios">Anuncios</string>
+    <string name="Item_Buscar">Buscar</string>
+    <string name="Item_Chats">Chats</string>
+    <string name="Item_Perfil">Perfil</string>
+    <string name="TituloRl">Título</string>
+    <string name="Ingresar_email">Ingresa con Correo</string>
+    <string name="Ingresar_google">Ingresa con Google</string>
+    <string name="Bienvenido">Bienvenido a Buscam</string>
+    <string name="descripcion">Ingresa a buscam y encuentra todo lo que buscas</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Txt_login_email">Correo electrónico</string>
+    <string name="Txt_login_password">Contraseña</string>
+    <string name="Txt_email">Ingresa tu correo</string>
+    <string name="Txt_password">Ingresa tu contraseña</string>
+    <string name="Btn_ingresar">Iniciar sesión</string>
+    <string name="Txt_no_cuenta">¿No tienes una cuénta?</string>
+    <string name="Txt_registrarme">Registrarse</string>
+    <string name="Txt_registro">Empieza Ahora</string>
+    <string name="Txt_r_password">Repetir Contraseña</string>
+    <string name="Btn_registrar">Registrar</string>
+    <string name="Txt_si_cuenta">¿Ya tienes una cuenta?</string>
+    <string name="Txt_ingresar">Ingresar</string>
+    <string name="Btn_cerrar_sesion">Cerrar sesión</string>
+    <!--Perlfil de usuario-->
+    <string name="Btn_editar_perfil">Editar Perfil</string>
+    <string name="Btn_vender">Vender</string>
+    <string name="Tv_nombres">Pedro Hernandez</string>
+    <string name="Txt_informacion">Información</string>
+    <string name="Txt_email_info">Email: </string>
+    <string name="Tv_email">email@dominio.com</string>
+    <string name="txt_nacimiento">Fecha de nacimiento: </string>
+    <string name="Tv_nacimiento">dd/mm/aaaa</string>
+    <string name="txt_miembro">Miembro desde: </string>
+    <string name="Tv_miembro">dd/mm/aaaa</string>
+    <string name="Txt_telefono">Teléfono: </string>
+    <string name="Tv_telefono">999999999</string>
+    <string name="Txt_estado_cuenta">Estado de cuenta:</string>
+    <string name="Tv_estado_cuenta">No verificado</string>
+    <string name="Txt_anuncios">Anuncios</string>
+    <!-- Editar perfil usuario-->
+    <string name="Txt_editar_p">Editar Perfil</string>
+    <string name="Txt_nombres_c">Nombres Y Apellidos</string>
+    <string name="Et_nombres">Ingresa aquí</string>
+    <string name="Txt_f_nac">Fecha de nacimiento</string>
+    <string name="Et_f_nac">Ingresa aquí</string>
+    <string name="Et_telefono">Ingresa aquí</string>
+    <string name="Btn_actualizar">Actualizar</string>
+</resources>
