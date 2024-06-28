@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".OpcionesLogin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="50dp">
+        <TextView
+            android:text="@string/Bienvenido"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="160dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"/>
+        <TextView
+            android:text="@string/descripcion"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -14,32 +40,47 @@
         android:padding="30dp"
         android:gravity="center">
 
-        <ImageView
-            android:src="@drawable/email"
-            android:layout_width="50dp"
-            android:layout_height="80dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/Ingresar_email"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/m_botton_height"
-            android:text="@string/Ingresar_email"
-            android:textAllCaps="true"
-            app:cornerRadius="8dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_corner">
+            <ImageView
+                android:src="@drawable/email"
+                android:layout_width="30dp"
+                android:layout_marginStart="80dp"
+                android:layout_height="60dp"/>
+            <TextView
+                android:id="@+id/Ingresar_email"
+                android:text="@string/Ingresar_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"/>
+        </LinearLayout>
 
-        <ImageView
-            android:src="@drawable/google"
-            android:layout_width="50dp"
-            android:layout_height="80dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/Ingresar_google"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/m_botton_height"
-            android:textAllCaps="true"
-            android:text="@string/Ingresar_google"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_corner"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:src="@drawable/google"
+                android:layout_width="25dp"
+                android:layout_marginStart="80dp"
+                android:layout_height="60dp"/>
+            <TextView
+                android:id="@+id/Ingresar_google"
+                android:text="@string/Ingresar_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"/>
+        </LinearLayout>
 
-            app:cornerRadius="8dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>

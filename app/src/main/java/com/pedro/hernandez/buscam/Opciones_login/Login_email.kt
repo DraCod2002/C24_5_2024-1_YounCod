@@ -23,64 +23,58 @@ class Login_email : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginEmailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         firebaseAuth = FirebaseAuth.getInstance()
-
         progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("Espere por favor")
+        progressDialog.setTitle("Espere por gavor")
         progressDialog.setCanceledOnTouchOutside(false)
-
         binding.BtnIngresar.setOnClickListener{
             validarInfo()
         }
-        binding.TxtRegistrarme.setOnClickListener {
-            startActivity(Intent(this@Login_email,Registro_email::class.java))
+        binding.TxtRegistrarme.setOnClickListener{
+            startActivity(Intent(this@Login_email, Registro_email::class.java))
         }
     }
-
     private var email = ""
     private var password = ""
-
     private fun validarInfo() {
-        email = binding.EtEmail.text.toString().trim()
-        password = binding.EtPassword.text.toString().trim()
+        email = binding.TxtEmail.text.toString().trim()
+        password = binding.TxtPassword.text.toString().trim()
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.EtEmail.error = "Email inválido"
-            binding.EtEmail.requestFocus()
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            binding.TxtEmail.error = "Correo inválido"
+            binding.TxtEmail.requestFocus()
         }
-        else if (email.isEmpty()){
-            binding. EtEmail.error = "Ingrese email"
-            binding. EtEmail.requestFocus()
+        else if(password.isEmpty()){
+            binding.TxtPassword.error = "Ingrese contraseña"
+            binding.TxtPassword.requestFocus()
+        } else{
+            loginUsuario()
         }
-        else if (password.isEmpty()){
-            binding. EtPassword.error = "Ingrese password"
-            binding.EtPassword.requestFocus()
-        }else{
-        loginUsuario()
     }
-}
 
     private fun loginUsuario() {
         progressDialog.setMessage("Ingresando")
         progressDialog.show()
+
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 progressDialog.dismiss()
-                startActivity(Intent( this, MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finishAffinity()
                 Toast.makeText(
                     this,
-                "Bienvenido(a)",
-                Toast.LENGTH_SHORT
+                    "Bienvenido(a)",
+                    Toast.LENGTH_SHORT
                 ).show()
             }
-            .addOnFailureListener {e->
+            .addOnFailureListener{e->
                 progressDialog.dismiss()
                 Toast.makeText(
-                     this,
-                "No se pudo iniciar sesión debido a ${e.message}",
-                Toast.LENGTH_SHORT
+                    this,
+                    "No se údo iniciar sesión debido a ${e.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
-    }
+            }
     }
 }
