@@ -50,9 +50,11 @@ dependencies {
     implementation(libs.logingGoogle)
     implementation(libs.glide)
     implementation(libs.ccp)
+    implementation(libs.firebaseStorage)
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-storage-ktx")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

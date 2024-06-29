@@ -13,7 +13,7 @@ googleServicesVersion="4.4.2"
 loginGoogleV="20.7.0"
 glideV="4.16.0"
 ccpV="2.7.0"
-
+firebaseStorageV="20.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,7 +27,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 logingGoogle={group="com.google.android.gms", name="play-services-auth", version.ref="loginGoogleV"}
 glide={group="com.github.bumptech.glide", name="glide", version.ref="glideV"}
 ccp={group="com.hbb20", name="ccp", version.ref="ccpV"}
-
+firebaseStorage={group="com.google.firebase",name="firebase-storage", version.ref="firebaseStorageV"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
