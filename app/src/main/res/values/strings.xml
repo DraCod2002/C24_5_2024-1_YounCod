@@ -29,7 +29,7 @@
     <!--Perlfil de usuario-->
     <string name="Btn_editar_perfil">Editar Perfil</string>
     <string name="Btn_vender">Vender</string>
-    <string name="Tv_nombres">Pedro Hernandez</string>
+    <string name="Tv_nombres">Usuario</string>
     <string name="Txt_informacion">Información</string>
     <string name="Txt_email_info">Email: </string>
     <string name="Tv_email">email@dominio.com</string>
