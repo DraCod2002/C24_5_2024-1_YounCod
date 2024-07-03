@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Buscam</string>
+    <string name="mi_google_maps_api_key">AIzaSyDSgoNkyVMM_sK1sG9J5ovJNqgYG8xK-gI</string>
 
     <string name="default_web_client_id">97834713505-3lpsrvrvs5nnl1jeuctddal9pbs7uboe.apps.googleusercontent.com</string>
     <string name="Item_Inicio">Inicio</string>
@@ -50,4 +51,19 @@
     <string name="Et_f_nac">Ingresa aquí</string>
     <string name="Et_telefono">Ingresa aquí</string>
     <string name="Btn_actualizar">Actualizar</string>
+
+    <!-- Crear anuncio-->
+    <string name="Et_marca">Nombre de la marca</string>
+    <string name="Categoria">Categoria</string>
+    <string name="Condicion">Condicion</string>
+    <string name="Locacion">Locación</string>
+    <string name="Et_precio">Precio</string>
+    <string name="Et_titulo">Titulo</string>
+    <string name="Et_descripcion">Descripción</string>
+    <string name="Btn_crear_anuncio">Crear anuncio</string>
+
+    <!-- Mapas -->
+    <string name="Txt_select_ubicacion">Seleccione ubicación</string>
+    <string name="Btn_listo">Listo</string>
+
 </resources>

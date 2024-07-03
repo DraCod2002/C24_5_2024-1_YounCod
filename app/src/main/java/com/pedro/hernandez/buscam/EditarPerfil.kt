@@ -11,7 +11,6 @@ import android.provider.MediaStore
 import android.view.Menu
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -25,11 +24,10 @@ import com.pedro.hernandez.buscam.databinding.ActivityEditarPerfilBinding
 
 
 class EditarPerfil : AppCompatActivity() {
-    private lateinit var binding : ActivityEditarPerfilBinding
+    private lateinit var binding: ActivityEditarPerfilBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var progressDialog: ProgressDialog
-
-    private var imageUri : Uri ?= null
+    private var imageUri : Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditarPerfilBinding.inflate(layoutInflater)
@@ -46,14 +44,15 @@ class EditarPerfil : AppCompatActivity() {
         binding.BtnActualizar.setOnClickListener{
             validarInfo()
         }
-        binding.FABCambiarImg.setOnClickListener{
-            selec_imagen_de()
-        }
-    }
 
+        binding.FABCambiarImg.setOnClickListener {
+            select_imagen_de()
+        }
+
+    }
     private var nombres = ""
     private var f_nac = ""
-    private var codigo = ""
+    private var codigo= ""
     private var telefono = ""
     private fun validarInfo() {
         nombres = binding.EtNombres.text.toString().trim()
@@ -72,7 +71,6 @@ class EditarPerfil : AppCompatActivity() {
             actualizarInfo()
         }
     }
-
     private fun actualizarInfo() {
         progressDialog.setMessage("Actualizando informacion")
 
@@ -101,7 +99,7 @@ class EditarPerfil : AppCompatActivity() {
     private fun cargarInfo() {
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child("${firebaseAuth.uid}")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val nombres = "${snapshot.child("nombres").value}"
                     val imagen = "${snapshot.child("urlImagenPerfil").value}"
@@ -118,17 +116,19 @@ class EditarPerfil : AppCompatActivity() {
                             .load(imagen)
                             .placeholder(R.drawable.perfil)
                             .into(binding.imgPerfil)
-                    }catch (e:Exception){
-                        Toast.makeText(this@EditarPerfil,
+                    } catch (e: Exception) {
+                        Toast.makeText(
+                            this@EditarPerfil,
                             "${e.message}",
-                            Toast.LENGTH_SHORT).show()
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     try {
                         val codigo = codTelefono.replace("+", "").toInt()
                         binding.selectorCod.setCountryForPhoneCode(codigo)
-                    }catch (e:Exception) {
-                       /* Toast.makeText(
+                    } catch (e: Exception) {
+                        /*Toast.makeText(
                             this@EditarPerfil,
                             "${e.message}",
                             Toast.LENGTH_SHORT
@@ -143,8 +143,8 @@ class EditarPerfil : AppCompatActivity() {
             })
     }
 
-    private fun subirImagenStore(){
-        progressDialog.setTitle("Subiendo imagen a Storage")
+    private fun subirImagenStorage(){
+        progressDialog.setMessage("Subiendo imagen a Storage")
         progressDialog.show()
 
         val rutaImagen = "ImagenesPerfil/" + firebaseAuth.uid
@@ -154,107 +154,107 @@ class EditarPerfil : AppCompatActivity() {
                 val uriTask = taskSnapShot.storage.downloadUrl
                 while (!uriTask.isSuccessful);
                 val urlImagenCargada = uriTask.result.toString()
-                if (uriTask.isSuccessful){
+                if(uriTask.isSuccessful){
                     actualizarImagenBD(urlImagenCargada)
                 }
             }
             .addOnFailureListener{e->
                 progressDialog.dismiss()
-                Toast.makeText(applicationContext,"${e.message}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun actualizarImagenBD(urlImagenCargada: String) {
-        progressDialog.setMessage("Actualizar imagen")
+        progressDialog.setMessage("Actualizando imagen")
         progressDialog.show()
 
-        val hashMap : HashMap<String,Any> = HashMap()
-        if (imageUri != null){
-            hashMap["urlImagenPerfil"] = urlImagenCargada
+        val hasMap : HashMap<String, Any> = HashMap()
+        if(imageUri != null){
+            hasMap["urlImagenPerfil"] = urlImagenCargada
         }
+
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child(firebaseAuth.uid!!)
-            .updateChildren(hashMap)
+            .updateChildren(hasMap)
             .addOnSuccessListener {
                 progressDialog.dismiss()
-                Toast.makeText(applicationContext,"Se actualizo su imagen de perfil",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Su imagen de perfil se ha actualizado", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener{e->
                 progressDialog.dismiss()
-                Toast.makeText(applicationContext,"${e.message}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun selec_imagen_de(){
-        val popupMenu = PopupMenu(this,binding.FABCambiarImg)
+    private fun select_imagen_de() {
+        val popuMenu = PopupMenu(this, binding.FABCambiarImg)
 
-        popupMenu.menu.add(Menu.NONE,1,1,"Camara")
-        popupMenu.menu.add(Menu.NONE,2,2,"Galeria")
+        popuMenu.menu.add(Menu.NONE, 1, 1, "Cámara")
+        popuMenu.menu.add(Menu.NONE, 2, 2, "Galeria")
 
-        popupMenu.show()
+        popuMenu.show()
 
-        popupMenu.setOnMenuItemClickListener{item->
+        popuMenu.setOnMenuItemClickListener { item ->
             val itemId = item.itemId
             if (itemId == 1) {
-                //Camara
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ){
-                    concenderpermisocamara.launch(arrayOf(android.Manifest.permission.CAMERA))
+                // Camara
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                    concederPermisoCamara.launch(arrayOf(android.Manifest.permission.CAMERA))
+
                 }else {
-                    concenderpermisocamara.launch(arrayOf(
+                    concederPermisoCamara.launch(arrayOf(
                         android.Manifest.permission.CAMERA,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                     ))
                 }
-            }else if (itemId == 2){
-                //Galeria
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            } else if (itemId == 2) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
                     imagenGaleria()
-                }else{
-                    concederPermisoAlmacenamineto.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                }else {
+                    concederPermisoAlmacenamiento.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
             }
             return@setOnMenuItemClickListener true
         }
-
     }
 
-    private val concenderpermisocamara =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){resultado->
+    private val concederPermisoCamara =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { resultado ->
             var concedidoTodos = true
-            for (seConcede in resultado.values){
+            for (seConcede in resultado.values) {
                 concedidoTodos = concedidoTodos && seConcede
             }
-            if (concedidoTodos){
-                imageCamara()
-            }else{
+            if (concedidoTodos) {
+                imagenCamara()
+            } else {
                 Toast.makeText(
                     this,
-                    "El permiso de la camara o almacenamiento ha sido denegado,o ambas fueron denegadas",
+                    "El permiso de la camra o almacenamiento ha sido denegado, o ambas fueron denegadas",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
 
-    private fun imageCamara() {
+    private fun imagenCamara() {
         val contentValues = ContentValues()
-        contentValues.put(MediaStore.Images.Media.TITLE,"Titulo_imagen")
-        contentValues.put(MediaStore.Images.Media.DESCRIPTION,"Descripcion_imagen")
+        contentValues.put(MediaStore.Images.Media.TITLE, "Titulo_imagen")
+        contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Descripcion_imagen")
         imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         resultadoCamara_ARL.launch(intent)
     }
+
     private val resultadoCamara_ARL =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){resultado->
             if(resultado.resultCode == Activity.RESULT_OK){
-                subirImagenStore()
-                /*try{
+                subirImagenStorage()
+                /*try {
                     Glide.with(this)
                         .load(imageUri)
                         .placeholder(R.drawable.perfil)
                         .into(binding.imgPerfil)
-
                 }catch (e:Exception){
 
                 }*/
@@ -265,18 +265,20 @@ class EditarPerfil : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+
         }
-    private val concederPermisoAlmacenamineto =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){esConcedido->
+    private val concederPermisoAlmacenamiento =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { esConcedido ->
             if (esConcedido){
                 imagenGaleria()
             }else{
                 Toast.makeText(
                     this,
-                    "El permiso de almacenamiento ha sido denegada",
+                    "El permiso por almacenamiento ha sido denegada",
                     Toast.LENGTH_SHORT
-                    ).show()
+                ).show()
             }
+
         }
 
     private fun imagenGaleria() {
@@ -290,13 +292,12 @@ class EditarPerfil : AppCompatActivity() {
             if(resultado.resultCode == Activity.RESULT_OK){
                 val data = resultado.data
                 imageUri = data!!.data
-                subirImagenStore()
-                /*try{
+                subirImagenStorage()
+                /*try {
                     Glide.with(this)
                         .load(imageUri)
                         .placeholder(R.drawable.perfil)
                         .into(binding.imgPerfil)
-
                 }catch (e:Exception){
 
                 }*/

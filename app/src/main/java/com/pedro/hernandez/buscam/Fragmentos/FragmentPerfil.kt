@@ -17,6 +17,7 @@ import com.pedro.hernandez.buscam.Constantes
 import com.pedro.hernandez.buscam.EditarPerfil
 import com.pedro.hernandez.buscam.OpcionesLogin
 import com.pedro.hernandez.buscam.R
+import com.pedro.hernandez.buscam.anuncios.CrearAnuncio
 
 import com.pedro.hernandez.buscam.databinding.FragmentPerfilBinding
 
@@ -38,12 +39,16 @@ class FragmentPerfil : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
         leerInfo()
         binding.BtnEditarPerfil.setOnClickListener{
             startActivity(Intent(mContext, EditarPerfil::class.java))
+        }
+        binding.BtnVender.setOnClickListener{
+            startActivity(Intent(mContext, CrearAnuncio::class.java))
         }
         binding.BtnCerrarSesion.setOnClickListener{
             firebaseAuth.signOut()

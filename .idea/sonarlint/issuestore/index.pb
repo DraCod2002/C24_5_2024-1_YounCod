@@ -35,3 +35,9 @@ j
 local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca
 l
 <app/src/main/java/com/pedro/hernandez/buscam/EditarPerfil.kt,6\e\6ec3c48ac3da4803e8712d54f1923e1d9f0807a8
+u
+Eapp/src/main/java/com/pedro/hernandez/buscam/anuncios/CrearAnuncio.kt,1\e\1eaa0166a79c69bd1083e1c99fe8e3e458cd0cb2
+~
+Napp/src/main/java/com/pedro/hernandez/buscam/Model/ModeloImagenSeleccionada.kt,f\5\f53f6153dd7a9358b82912deb589a0787cdc0e8d
+‡
+Wapp/src/main/java/com/pedro/hernandez/buscam/Adaptadores/AdaptadorImagenSeleccionada.kt,e\a\ea38bad3d27db14bec08497f5372abadc3f982f4

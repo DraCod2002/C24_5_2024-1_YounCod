@@ -10,6 +10,7 @@ import com.pedro.hernandez.buscam.Fragmentos.FragmentAnuncios
 import com.pedro.hernandez.buscam.Fragmentos.FragmentChats
 import com.pedro.hernandez.buscam.Fragmentos.FragmentInicio
 import com.pedro.hernandez.buscam.Fragmentos.FragmentPerfil
+import com.pedro.hernandez.buscam.anuncios.CrearAnuncio
 import com.pedro.hernandez.buscam.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -50,6 +51,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        /*binding.FAB.setOnClickListener{
+            startActivity(Intent(this, CrearAnuncio::class.java))
+        }*/
     }
 
         private fun comprobarSesion(){

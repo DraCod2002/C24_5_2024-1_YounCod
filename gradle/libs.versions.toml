@@ -14,6 +14,9 @@ loginGoogleV="20.7.0"
 glideV="4.16.0"
 ccpV="2.7.0"
 firebaseStorageV="20.3.0"
+mapsV="18.2.0"
+placesV="3.5.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +31,9 @@ logingGoogle={group="com.google.android.gms", name="play-services-auth", version
 glide={group="com.github.bumptech.glide", name="glide", version.ref="glideV"}
 ccp={group="com.hbb20", name="ccp", version.ref="ccpV"}
 firebaseStorage={group="com.google.firebase",name="firebase-storage", version.ref="firebaseStorageV"}
+mapas={group="com.google.android.gms", name="play-services-maps", version.ref="mapsV"}
+places={group="com.google.android.libraries.places", name="places", version.ref="placesV"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

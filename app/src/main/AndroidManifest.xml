@@ -5,13 +5,14 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,6 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buscam"
         tools:targetApi="31">
+        <activity
+            android:name=".SeleccionarUbicacion"
+            android:exported="false" />
+        <activity
+            android:name=".anuncios.CrearAnuncio"
+            android:exported="false" />
         <activity
             android:name=".EditarPerfil"
             android:exported="false" />
@@ -49,6 +56,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/mi_google_maps_api_key" />
     </application>
 
 </manifest>
