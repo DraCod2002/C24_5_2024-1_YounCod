@@ -9,15 +9,34 @@ object Constantes {
     const val anuncio_vendido = "Vendido"
 
     val categorias = arrayOf(
+        "Todos",
         "Móbiles",
-        "Ordenadores/Laptos",
-        "Electrónica y electrodomésticos",
+        "Computo",
+        "Electrónica",
         "Vehículoes",
-        "Consolas y videojuegos",
-        "Hogar y muebles",
-        "Belleza y cuidado personal",
+        "Consolas",
+        "Muebles",
+        "Belleza",
         "Libros",
-        "Deportes"
+        "Deportes",
+        "Juguetes",
+        "Mascotas"
+    )
+    val categoriasIcono = arrayOf(
+        R.drawable.ic_category,
+        R.drawable.ic_categoria_mobiles,
+        R.drawable.ic_categoria_ordenadores,
+        R.drawable.ic_categoria_electrodomesticos,
+        R.drawable.ic_categoria_vehiculos,
+        R.drawable.ic_categoria_consolas,
+        R.drawable.ic_categoria_muebles,
+        R.drawable.ic_categoria_belleza,
+        R.drawable.ic_categoria_libros,
+        R.drawable.ic_categoria_sports,
+        R.drawable.ic_categoria_juguetes,
+        R.drawable.ic_categoria_mascotas
+
+
     )
     val condiciones = arrayOf(
         "Nuevo",

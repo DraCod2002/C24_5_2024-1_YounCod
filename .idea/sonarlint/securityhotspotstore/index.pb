@@ -41,3 +41,5 @@ Eapp/src/main/java/com/pedro/hernandez/buscam/anuncios/CrearAnuncio.kt,1\e\1eaa
 Napp/src/main/java/com/pedro/hernandez/buscam/Model/ModeloImagenSeleccionada.kt,f\5\f53f6153dd7a9358b82912deb589a0787cdc0e8d
 ‡
 Wapp/src/main/java/com/pedro/hernandez/buscam/Adaptadores/AdaptadorImagenSeleccionada.kt,e\a\ea38bad3d27db14bec08497f5372abadc3f982f4
+t
+Dapp/src/main/java/com/pedro/hernandez/buscam/SeleccionarUbicacion.kt,1\e\1ea46dca6147fc663d70d8b55401923b737087c1
