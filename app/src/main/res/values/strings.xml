@@ -65,5 +65,18 @@
     <!-- Mapas -->
     <string name="Txt_select_ubicacion">Seleccione ubicación</string>
     <string name="Btn_listo">Listo</string>
+    
+    <!-- Fragmento Inicio -->
+    <string name="Tv_locacion">Elija una locación</string>
+    <string name="Et_buscar">Buscar </string>
+    <string name="Tv_categoria">Categorias</string>
 
+    <!--Item anuncio-->
+    <string name="Tv_titulo">Nombre del producto</string>
+    <string name="Tv_descripcion">Descripción del producto, se podrá visualizar un máximo de 3 lineas</string>
+    <string name="Tv_direccion">Dirección</string>
+    <string name="Tv_condicion">Nuevo</string>
+    <string name="Tv_simbolo_precio">S/</string>
+    <string name="Tv_precio">00</string>
+    <string name="Tv_fecha">dd/MM/yyyy</string>
 </resources>
