@@ -24,17 +24,17 @@
         <!--Imagen de Perfil-->
         <RelativeLayout
             android:id="@+id/perfilRl"
-            android:layout_width="120dp"
+            android:layout_width="135dp"
             android:layout_marginTop="15dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/Txt_editar_p"
-            android:layout_height="120dp">
-            <ImageView
+            android:layout_height="135dp">
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_perfil"
                 android:src="@drawable/perfil"
                 android:scaleType="centerCrop"
-                android:layout_width="150dp"
-                android:layout_height="150dp"/>
+                android:layout_width="120dp"
+                android:layout_height="120dp"/>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/FABCambiarImg"
                 android:layout_alignParentEnd="true"

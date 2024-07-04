@@ -45,7 +45,7 @@
 
     </RelativeLayout>
     <fragment
-        android:id="@+id/MapFrgament"
+        android:id="@+id/MapFragment"
         android:layout_below="@+id/ToolbarRl"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
