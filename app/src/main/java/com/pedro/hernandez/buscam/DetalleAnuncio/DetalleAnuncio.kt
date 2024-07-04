@@ -1,10 +1,16 @@
 package com.pedro.hernandez.buscam.DetalleAnuncio
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -12,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.pedro.hernandez.buscam.Adaptadores.AdaptadorImgSlider
 import com.pedro.hernandez.buscam.Constantes
+import com.pedro.hernandez.buscam.MainActivity
 import com.pedro.hernandez.buscam.Model.ModeloAnuncio
 import com.pedro.hernandez.buscam.Model.ModeloImgSlider
 import com.pedro.hernandez.buscam.R
@@ -22,12 +29,15 @@ class DetalleAnuncio : AppCompatActivity() {
     private lateinit var binding: ActivityDetalleAnuncioBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private var idAnuncio = ""
+
     private var anuncioLatitud = 0.0
     private var anuncioLongitud = 0.0
 
     private var uidVendedor = ""
     private var telVendedor = ""
+
     private var favorito = false
+
     private lateinit var imagenSliderArrayList : ArrayList<ModeloImgSlider>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +53,74 @@ class DetalleAnuncio : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         idAnuncio = intent.getStringExtra("idAnuncio").toString()
+
+
+        binding.IbRegresar.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         cargarInfoAnuncio()
         cargarImgAnuncio()
+        comprobarAnuncioFav()
+        eliminarAnuncio()
+
+        binding.IbEliminar.setOnClickListener {
+            val mAlertDialog = MaterialAlertDialogBuilder(this)
+            mAlertDialog.setTitle("Eliminar anuncio")
+                .setMessage("¿Estás seguro de eliminar este anuncio?")
+                .setPositiveButton("Eliminar"){dialog, which->
+                    eliminarAnuncio()
+                }
+                .setNegativeButton("Cancelar"){dialog, which->
+                    dialog.dismiss()
+                }.show()
         }
+        binding.IbFav.setOnClickListener{
+            if(favorito){
+                //true
+                Constantes.eliminarAnuncioFav(this,idAnuncio)
+            }else{
+                //false
+                Constantes.agregarAnuncioFav(this,idAnuncio)
+            }
+        }
+        binding.BtnMapa.setOnClickListener {
+            Constantes.mapaIntent(this, anuncioLatitud, anuncioLongitud)
+        }
+
+        binding.BtnLlamar.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(applicationContext,
+                    android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
+                val numTel = telVendedor
+                if (numTel.isEmpty()){
+                    Toast.makeText(this@DetalleAnuncio,
+                        "El vendedor no tiene número telefónico",
+                        Toast.LENGTH_SHORT).show()
+                }else{
+                    Constantes.llamarIntent(this, numTel)
+                }
+            }else{
+                permisoLlamada.launch(android.Manifest.permission.CALL_PHONE)
+            }
+
+        }
+
+        binding.BtnSms.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(applicationContext,
+                    android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+                val numTel = telVendedor
+                if (numTel.isEmpty()){
+                    Toast.makeText(this@DetalleAnuncio,
+                        "El vendedor no tiene un número telefónico",
+                        Toast.LENGTH_SHORT).show()
+                }else{
+                    Constantes.smsIntent(this, numTel)
+                }
+            }else{
+                permisoSms.launch(android.Manifest.permission.SEND_SMS)
+            }
+
+        }
+    }
     private fun cargarInfoAnuncio(){
         var ref = FirebaseDatabase.getInstance().getReference("Anuncios")
         ref.child(idAnuncio)
@@ -190,4 +265,87 @@ class DetalleAnuncio : AppCompatActivity() {
                 }
             })
     }
+    private fun comprobarAnuncioFav(){
+        val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
+        ref.child("${firebaseAuth.uid}").child("Favoritos").child(idAnuncio)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    favorito = snapshot.exists()
+
+                    if (favorito){
+                        //Favorito = true
+                        binding.IbFav.setImageResource(R.drawable.ic_anuncio_es_favorito)
+                    }else{
+                        //Favorito = false
+                        binding.IbFav.setImageResource(R.drawable.ic_no_favorito)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
+    private fun eliminarAnuncio(){
+        val ref = FirebaseDatabase.getInstance().getReference("Anuncios")
+        ref.child(idAnuncio)
+            .removeValue()
+            .addOnSuccessListener {
+                startActivity(Intent(this@DetalleAnuncio, MainActivity::class.java))
+                finishAffinity()
+                Toast.makeText(
+                    this,
+                    "Se eliminó el anuncio con éxito",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .addOnFailureListener {e->
+                Toast.makeText(
+                    this,
+                    "${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+    }
+
+    private val permisoLlamada =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){conceder->
+            if (conceder){
+                //True
+                val numTel = telVendedor
+                if (numTel.isEmpty()){
+                    Toast.makeText(this@DetalleAnuncio,
+                        "El vendedor no tiene número telefónico",
+                        Toast.LENGTH_SHORT).show()
+                }else{
+                    Constantes.llamarIntent(this, numTel)
+                }
+            }else{
+                Toast.makeText(this@DetalleAnuncio,
+                    "El permiso de realizar llamadas telefónicas no está concedida, por favor habilítela en los ajustes del dispositivo",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+    private val permisoSms =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){conceder->
+            if (conceder){
+                //true
+                val numTel = telVendedor
+                if (numTel.isEmpty()){
+                    Toast.makeText(this@DetalleAnuncio,
+                        "El vendedor no tiene un número telefónico",
+                        Toast.LENGTH_SHORT).show()
+                }else{
+                    Constantes.smsIntent(this, numTel)
+                }
+            }else{
+                //false
+                Toast.makeText(this@DetalleAnuncio,
+                    "El permiso de envío de mensajes SMS no está concedido, por favor habilítelo en los ajustes del teléfono",
+                    Toast.LENGTH_SHORT).show()
+            }
+
+        }
 }

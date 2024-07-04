@@ -1,6 +1,8 @@
 package com.pedro.hernandez.buscam
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.text.format.DateFormat
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -94,5 +96,32 @@ object Constantes {
                     "${e.message}",
                     Toast.LENGTH_SHORT).show()
             }
+    }
+    fun mapaIntent (context: Context, latitud : Double, longitud : Double){
+        val googleMapIntentUri = Uri.parse("http://maps.google.com/maps?daddr=$latitud,$longitud")
+
+        val mapIntent = Intent(Intent.ACTION_VIEW, googleMapIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        if (mapIntent.resolveActivity(context.packageManager)!=null){
+            //La app de google maps si está instalada
+            context.startActivity(mapIntent)
+        }else{
+            //Si la app de google maps no está instalada
+            Toast.makeText(context, "No tienes instalada la aplicación de Google Maps",
+                Toast.LENGTH_SHORT).show()
+        }
+
+    }
+    fun llamarIntent (context: Context, tef : String){
+        val intent = Intent(Intent.ACTION_CALL)
+        intent.setData(Uri.parse("tel:$tef"))
+        context.startActivity(intent)
+    }
+
+    fun smsIntent (context: Context, tel : String){
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.setData(Uri.parse("smsto:$tel"))
+        intent.putExtra("sms_body", "")
+        context.startActivity(intent)
     }
 }
