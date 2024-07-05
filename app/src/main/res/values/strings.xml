@@ -52,26 +52,36 @@
     <string name="Et_telefono">Ingresa aquí</string>
     <string name="Btn_actualizar">Actualizar</string>
 
-    <string name="Txt_detalle_info">Detalle del Anuncio</string>
-    <string name="Txt_estado"> </string>
-    <string name="Tv_estado"> </string>
-    <string name="Txt_categoria">Categoria </string>
-    <string name="Tv_cat">Categoria del Anuncio</string>
-    <string name="Txt_titulo"> Titulo</string>
-    <string name="Txt_descripcion"> Descripciòn</string>
-    <string name="Tv_descr">Descripciòn del anuncio </string>
-    <string name="Txt_direccion"> Direcciòn</string>
-    <string name="Txt_vistas"> </string>
-    <string name="Tv_vistas"> </string>
-    <string name="Txt_descr_vendedor">Descripciòn del vendedor </string>
-    <string name="Txt_miembro">Miembro desde: </string>
-    <string name="informacion"> </string>
-    <string name="Btn_mapa"> MAPA </string>
-    <string name="Btn_llamar"> LLAMAR </string>
-    <string name="Btn_sms"> SMS </string>
-    <string name="Btn_chat"> CHAT </string>
+    <!--Item anuncio-->
+    <string name="Tv_titulo">Nombre del producto</string>
+    <string name="Tv_descripcion">Descripción del producto, se podrá visualizar un máximo de 3 líneas</string>
+    <string name="Tv_direccion">Dirección</string>
+    <string name="Tv_condicion">Nuevo</string>
+    <string name="Tv_simbolo_precio">S/</string>
+    <string name="Tv_precio">00</string>
+    <string name="Tv_fecha">dd/MM/yyyy</string>
 
-    <string name="imagenContadorTv"> </string>
+    <string name="Txt_detalle_info">Detalle del anuncio</string>
+    <string name="Tv_cat">Categoría del anuncio</string>
+    <string name="Txt_titulo">Titulo</string>
+    <string name="Txt_descripcion">Descripción</string>
+    <string name="Tv_descr">Descripción del anuncio</string>
+    <string name="Txt_direccion">Dirección</string>
+    <string name="Txt_vistas">Número de visitas del anuncio: </string>
+    <string name="Tv_vistas">0</string>
+    <string name="Txt_descr_vendedor">Descripción del vendedor</string>
+    <string name="Txt_estado">Estado</string>
+    <string name="Tv_estado">Disponible</string>
+    <string name="Txt_miembro">Miembro desde:</string>
+    <string name="Txt_categoria">Categoria del anuncio</string>
+    <!--Opciones de detalle anuncio-->
+    <string name="Btn_mapa">Mapa</string>
+    <string name="Btn_llamar">Llam.</string>
+    <string name="Btn_sms">SMS</string>
+    <string name="Btn_chat">Chat</string>
+
+    <string name="imagenContadorTv">1/4</string>
+
 
     <!-- Crear anuncio-->
     <string name="Et_marca">Nombre de la marca</string>
@@ -92,12 +102,4 @@
     <string name="Et_buscar">Buscar </string>
     <string name="Tv_categoria">Categorias</string>
 
-    <!--Item anuncio-->
-    <string name="Tv_titulo">Nombre del producto</string>
-    <string name="Tv_descripcion">Descripción del producto, se podrá visualizar un máximo de 3 lineas</string>
-    <string name="Tv_direccion">Dirección</string>
-    <string name="Tv_condicion">Nuevo</string>
-    <string name="Tv_simbolo_precio">S/</string>
-    <string name="Tv_precio">00</string>
-    <string name="Tv_fecha">dd/MM/yyyy</string>
 </resources>

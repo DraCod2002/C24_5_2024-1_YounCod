@@ -1,10 +1,13 @@
 package com.pedro.hernandez.buscam.DetalleAnuncio
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +25,13 @@ import com.pedro.hernandez.buscam.MainActivity
 import com.pedro.hernandez.buscam.Model.ModeloAnuncio
 import com.pedro.hernandez.buscam.Model.ModeloImgSlider
 import com.pedro.hernandez.buscam.R
+import com.pedro.hernandez.buscam.anuncios.CrearAnuncio
 import com.pedro.hernandez.buscam.databinding.ActivityDetalleAnuncioBinding
 import java.util.HashMap
 
 class DetalleAnuncio : AppCompatActivity() {
-    private lateinit var binding: ActivityDetalleAnuncioBinding
+
+    private lateinit var binding : ActivityDetalleAnuncioBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private var idAnuncio = ""
 
@@ -39,6 +44,7 @@ class DetalleAnuncio : AppCompatActivity() {
     private var favorito = false
 
     private lateinit var imagenSliderArrayList : ArrayList<ModeloImgSlider>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetalleAnuncioBinding.inflate(layoutInflater)
@@ -52,16 +58,31 @@ class DetalleAnuncio : AppCompatActivity() {
         binding.BtnChat.visibility = View.GONE
 
         firebaseAuth = FirebaseAuth.getInstance()
+
         idAnuncio = intent.getStringExtra("idAnuncio").toString()
 
 
         binding.IbRegresar.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+
+        comprobarAnuncioFav()
         cargarInfoAnuncio()
         cargarImgAnuncio()
-        comprobarAnuncioFav()
-        eliminarAnuncio()
+
+        binding.IbEditar.setOnClickListener {
+            opcionesDialog()
+        }
+
+        binding.IbFav.setOnClickListener {
+            if (favorito){
+                //true
+                Constantes.eliminarAnuncioFav(this, idAnuncio)
+            }else{
+                //false
+                Constantes.agregarAnuncioFav(this,idAnuncio)
+            }
+        }
 
         binding.IbEliminar.setOnClickListener {
             val mAlertDialog = MaterialAlertDialogBuilder(this)
@@ -74,15 +95,7 @@ class DetalleAnuncio : AppCompatActivity() {
                     dialog.dismiss()
                 }.show()
         }
-        binding.IbFav.setOnClickListener{
-            if(favorito){
-                //true
-                Constantes.eliminarAnuncioFav(this,idAnuncio)
-            }else{
-                //false
-                Constantes.agregarAnuncioFav(this,idAnuncio)
-            }
-        }
+
         binding.BtnMapa.setOnClickListener {
             Constantes.mapaIntent(this, anuncioLatitud, anuncioLongitud)
         }
@@ -99,7 +112,7 @@ class DetalleAnuncio : AppCompatActivity() {
                     Constantes.llamarIntent(this, numTel)
                 }
             }else{
-                permisoLlamada.launch(android.Manifest.permission.CALL_PHONE)
+                permisoLlamada.launch(Manifest.permission.CALL_PHONE)
             }
 
         }
@@ -120,11 +133,40 @@ class DetalleAnuncio : AppCompatActivity() {
             }
 
         }
+
+
     }
+
+    private fun opcionesDialog() {
+        val popupMenu = PopupMenu(this, binding.IbEditar)
+
+        popupMenu.menu.add(Menu.NONE,0,0, "Editar")
+        popupMenu.menu.add(Menu.NONE,1,1, "Marcar como vendido")
+
+        popupMenu.show()
+
+        popupMenu.setOnMenuItemClickListener {item->
+            val itemId = item.itemId
+
+            if (itemId == 0){
+                //Editar
+                val intent = Intent(this, CrearAnuncio::class.java)
+                intent.putExtra("Edicion", true)
+                intent.putExtra("idAnuncio", idAnuncio)
+                startActivity(intent)
+            }else if (itemId == 1){
+                //Marcar como vendido
+            }
+
+            return@setOnMenuItemClickListener true
+        }
+
+    }
+
     private fun cargarInfoAnuncio(){
         var ref = FirebaseDatabase.getInstance().getReference("Anuncios")
         ref.child(idAnuncio)
-            .addValueEventListener(object : ValueEventListener {
+            .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     try {
                         val modeloAnuncio = snapshot.getValue(ModeloAnuncio::class.java)
@@ -140,6 +182,7 @@ class DetalleAnuncio : AppCompatActivity() {
                         anuncioLatitud = modeloAnuncio.latitud
                         anuncioLongitud = modeloAnuncio.Longitud
                         val tiempo = modeloAnuncio.tiempo
+
                         val formatoFecha = Constantes.obtenerFecha(tiempo)
 
                         if (uidVendedor == firebaseAuth.uid){
@@ -205,6 +248,27 @@ class DetalleAnuncio : AppCompatActivity() {
 
     }
 
+    private fun marcarAnuncioVendido(){
+        val hashMap = HashMap<String, Any>()
+        hashMap["estado"] = "${Constantes.anuncio_vendido}"
+
+        val ref = FirebaseDatabase.getInstance().getReference("Anuncios")
+        ref.child(idAnuncio)
+            .updateChildren(hashMap)
+            .addOnSuccessListener {
+                Toast.makeText(this,
+                    "El anuncio ha sido marcado como vendido",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+            .addOnFailureListener {e->
+                Toast.makeText(this,
+                    "No se marcó como vendido debido a ${e.message}",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+    }
+
     private fun cargarInfoVendedor() {
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child(uidVendedor)
@@ -214,7 +278,7 @@ class DetalleAnuncio : AppCompatActivity() {
                     val codTel = "${snapshot.child("codigoTelefono").value}"
                     val nombres = "${snapshot.child("nombres").value}"
                     val imagenPerfil = "${snapshot.child("urlImagenPerfil").value}"
-                    val tiempo_reg = snapshot.child("tiempo").value as Long
+                    val tiempo_reg = snapshot.child("tiempo").value as? Long ?: 0L
 
                     val for_fecha = Constantes.obtenerFecha(tiempo_reg)
 
@@ -237,7 +301,11 @@ class DetalleAnuncio : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-            })    }
+            })
+
+
+    }
+
     private fun cargarImgAnuncio(){
         imagenSliderArrayList = ArrayList()
 
@@ -265,6 +333,7 @@ class DetalleAnuncio : AppCompatActivity() {
                 }
             })
     }
+
     private fun comprobarAnuncioFav(){
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child("${firebaseAuth.uid}").child("Favoritos").child(idAnuncio)
@@ -328,6 +397,7 @@ class DetalleAnuncio : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
             }
         }
+
     private val permisoSms =
         registerForActivityResult(ActivityResultContracts.RequestPermission()){conceder->
             if (conceder){
