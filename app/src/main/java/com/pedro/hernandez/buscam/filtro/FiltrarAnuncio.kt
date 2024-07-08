@@ -34,7 +34,9 @@ class FiltrarAnuncio (
         return resultado
     }
 
-    override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+    override fun publishResults(filtro: CharSequence?, resultados: FilterResults) {
+        adaptador.anuncioArrayList = resultados.values  as ArrayList<ModeloAnuncio>
+        adaptador.notifyDataSetChanged()
 
     }
 }

@@ -43,3 +43,9 @@ Napp/src/main/java/com/pedro/hernandez/buscam/Model/ModeloImagenSeleccionada.kt
 Wapp/src/main/java/com/pedro/hernandez/buscam/Adaptadores/AdaptadorImagenSeleccionada.kt,e\a\ea38bad3d27db14bec08497f5372abadc3f982f4
 t
 Dapp/src/main/java/com/pedro/hernandez/buscam/SeleccionarUbicacion.kt,1\e\1ea46dca6147fc663d70d8b55401923b737087c1
+|
+Lapp/src/main/java/com/pedro/hernandez/buscam/Adaptadores/AdaptadroAnuncio.kt,6\3\631159c65f30e1c6af5dfc06b816f1443926c339
+~
+Napp/src/main/java/com/pedro/hernandez/buscam/Adaptadores/AdaptadorCategoria.kt,d\e\de6832d907f14dd61db1aef68111f5572dcbb321
+u
+Eapp/src/main/java/com/pedro/hernandez/buscam/filtro/FiltrarAnuncio.kt,3\8\388fbda10a7434ff4f1ef76dc0633b560f5d196f
