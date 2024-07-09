@@ -1,5 +1,6 @@
 package com.pedro.hernandez.buscam.Fragmentos
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.pedro.hernandez.buscam.CambiarPassword
 import com.pedro.hernandez.buscam.Constantes
 import com.pedro.hernandez.buscam.EditarPerfil
 import com.pedro.hernandez.buscam.OpcionesLogin
@@ -26,7 +28,7 @@ class FragmentPerfil : Fragment() {
     private lateinit var binding : FragmentPerfilBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var mContext : android.content.Context
-
+    private lateinit var progressDialog: ProgressDialog
     override fun onAttach(context: android.content.Context) {
         mContext = context
         super.onAttach(context)
@@ -42,10 +44,19 @@ class FragmentPerfil : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressDialog = ProgressDialog(mContext)
+        progressDialog.setTitle("Espere por favor")
+        progressDialog.setCanceledOnTouchOutside(false)
         firebaseAuth = FirebaseAuth.getInstance()
         leerInfo()
         binding.BtnEditarPerfil.setOnClickListener{
             startActivity(Intent(mContext, EditarPerfil::class.java))
+        }
+        binding.BtnCambiarPass.setOnClickListener {
+            startActivity(Intent(mContext, CambiarPassword::class.java))
+        }
+        binding.BtnVerificarCuenta.setOnClickListener {
+            verificarCuenta()
         }
         binding.BtnVender.setOnClickListener{
             startActivity(Intent(mContext, CrearAnuncio::class.java))
@@ -56,6 +67,31 @@ class FragmentPerfil : Fragment() {
             activity?.finishAffinity()
         }
     }
+
+    private fun verificarCuenta() {
+        progressDialog.setMessage("Enviando instrucciones de verificación a su correo electrónico")
+        progressDialog.show()
+
+        firebaseAuth.currentUser!!.sendEmailVerification()
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(
+                    mContext,
+                    "Las instrucciones fueron enviadas a su correo registrado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .addOnFailureListener {e->
+                progressDialog.dismiss()
+                Toast.makeText(
+                    mContext,
+                    "${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+
+        }
 
     private fun leerInfo() {
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
@@ -98,12 +134,18 @@ class FragmentPerfil : Fragment() {
                     if(proveedor == "Email"){
                         val esVerificado = firebaseAuth.currentUser!!.isEmailVerified
                         if(esVerificado){
+                            //Verificado
+                            binding.BtnVerificarCuenta.visibility = View.GONE
                             binding.TvEstadoCuenta.text = "Verificado"
 
                         } else{
+                            //No verificado
+                            binding.BtnVerificarCuenta.visibility = View.VISIBLE
                             binding.TvEstadoCuenta.text = "No verificado"
                         }
                     }else{
+                        //Ingreso con cuenta de google
+                        binding.BtnVerificarCuenta.visibility = View.GONE
                         binding.TvEstadoCuenta.text = "Verificado"
                     }
                 }

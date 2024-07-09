@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.pedro.hernandez.buscam.Adaptadores.AdaptadorImgSlider
 import com.pedro.hernandez.buscam.Constantes
+import com.pedro.hernandez.buscam.DetalleVendedor.DetalleVendedor
 import com.pedro.hernandez.buscam.MainActivity
 import com.pedro.hernandez.buscam.Model.ModeloAnuncio
 import com.pedro.hernandez.buscam.Model.ModeloImgSlider
@@ -134,7 +135,12 @@ class DetalleAnuncio : AppCompatActivity() {
 
         }
 
-
+        binding.IvInfoVendedor.setOnClickListener {
+            val intent = Intent(this, DetalleVendedor::class.java)
+            intent.putExtra("uidVendedor", uidVendedor)
+            Toast.makeText(this,"El uid del vendedor es ${uidVendedor}",Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+        }
     }
 
     private fun opcionesDialog() {

@@ -44,6 +44,8 @@
             app:icon="@drawable/ic_edit"
             android:layout_width="150dp"
             android:layout_height="@dimen/m_button_height"/>
+
+
         <!--Vender-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Btn_vender"
@@ -162,8 +164,28 @@
             android:text="@string/Btn_cerrar_sesion"
             android:layout_centerInParent="true"
             android:layout_below="@+id/TextAnuncios"
-            android:layout_width="wrap_content"
+            android:layout_width="220dp"
             android:layout_height="@dimen/m_button_height"/>
+        <!--Cambiar password-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_cambiar_pass"
+            android:layout_width="220dp"
+            android:layout_height="@dimen/m_button_height"
+            android:layout_below="@+id/Btn_verificar_cuenta"
+            android:layout_centerInParent="true"
+            android:text="@string/Btn_cambiar_pass"
+            android:textAllCaps="true"
+            app:icon="@drawable/ic_password" />
+        <!--Verificar cuenta-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_verificar_cuenta"
+            android:layout_width="220dp"
+            android:layout_height="@dimen/m_button_height"
+            android:layout_below="@+id/Btn_cerrar_sesion"
+            android:layout_centerInParent="true"
+            android:text="@string/Btn_verificar_cuenta"
+            android:textAllCaps="true"
+            app:icon="@drawable/ic_verificar" />
 
     </RelativeLayout>
 
