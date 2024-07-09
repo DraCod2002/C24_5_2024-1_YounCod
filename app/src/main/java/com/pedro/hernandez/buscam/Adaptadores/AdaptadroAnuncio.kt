@@ -2,13 +2,13 @@ package com.pedro.hernandez.buscam.Adaptadores
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -20,23 +20,26 @@ import com.pedro.hernandez.buscam.DetalleAnuncio.DetalleAnuncio
 import com.pedro.hernandez.buscam.Model.ModeloAnuncio
 import com.pedro.hernandez.buscam.R
 import com.pedro.hernandez.buscam.databinding.ItemAnuncioBinding
+import com.pedro.hernandez.buscam.databinding.ItemAnuncioNuevaVersionBinding
 import com.pedro.hernandez.buscam.filtro.FiltrarAnuncio
 
 class AdaptadroAnuncio : RecyclerView.Adapter<AdaptadroAnuncio.HolderAnuncio>, Filterable {
-    private lateinit var binding : ItemAnuncioBinding
+    private lateinit var binding : ItemAnuncioNuevaVersionBinding
     private var context : Context
     var anuncioArrayList : ArrayList<ModeloAnuncio>
     private var firebaseAuth : FirebaseAuth
-    private var filtroLista : ArrayList<ModeloAnuncio>
-    private var filtro : FiltrarAnuncio ?= null
+
+    private var filtroLista :ArrayList<ModeloAnuncio>
+    private var filtro : FiltrarAnuncio? = null
     constructor(context: Context, anuncioArrayList: ArrayList<ModeloAnuncio>) {
         this.context = context
         this.anuncioArrayList = anuncioArrayList
         this.filtroLista = anuncioArrayList
         firebaseAuth = FirebaseAuth.getInstance()
+        this.filtroLista = anuncioArrayList
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderAnuncio {
-        binding = ItemAnuncioBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemAnuncioNuevaVersionBinding.inflate(LayoutInflater.from(context), parent, false)
         return HolderAnuncio(binding.root)
     }
 
@@ -69,6 +72,14 @@ class AdaptadroAnuncio : RecyclerView.Adapter<AdaptadroAnuncio.HolderAnuncio>, F
             val intent = Intent(context, DetalleAnuncio::class.java)
             intent.putExtra("idAnuncio",modeloAnuncio.id)
             context.startActivity(intent)
+        }
+
+        if(condicion.equals("Nuevo")){
+            holder.Tv_condicion.setTextColor(Color.parseColor("#48C9B0"))
+        }else if (condicion.equals("Usado")){
+            holder.Tv_condicion.setTextColor(Color.parseColor("#5DADE2"))
+        }else if (condicion.equals("Renovado")){
+            holder.Tv_condicion.setTextColor(Color.parseColor("#A569BD"))
         }
         holder.Ib_fav.setOnClickListener{
             val favorito = modeloAnuncio.favorito
@@ -145,7 +156,8 @@ class AdaptadroAnuncio : RecyclerView.Adapter<AdaptadroAnuncio.HolderAnuncio>, F
 
     override fun getFilter(): Filter {
         if (filtro == null){
-            filtro = FiltrarAnuncio(this,filtroLista)
+
+            filtro = FiltrarAnuncio(this, filtroLista)
         }
         return filtro as FiltrarAnuncio
     }

@@ -70,35 +70,39 @@ class FragmentInicio : Fragment() {
         cargarAnuncios("Todos")
 
         binding.TvLocacion.setOnClickListener{
-                val intent = Intent(mContext, SeleccionarUbicacion::class.java)
-                seleccionarUbicacionARL.launch(intent)
-            }
-        binding.EtBuscar.addTextChangedListener(object: TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            val intent = Intent(mContext, SeleccionarUbicacion::class.java)
+            seleccionarUbicacionARL.launch(intent)
+        }
+        binding.EtBuscar.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
 
-            override fun onTextChanged(filtro: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(filtro: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 try {
                     val consulta = filtro.toString()
                     adaptadorAnuncio.filter.filter(consulta)
-                }catch (e:Exception){}
+                }catch (e:Exception){
+
+                }
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(p0: Editable?) {
+
             }
+
         })
         binding.IbLimpiar.setOnClickListener{
             val consulta = binding.EtBuscar.text.toString().trim()
-            if (consulta.isNotEmpty()){
+            if(consulta.isNotEmpty()){
                 binding.EtBuscar.setText("")
-                Toast.makeText(context,"Se ha limpiado el campo de busqueda", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Se ha limpiado el campo de búsqueda", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(context,"No se ha ingresado una consulta",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "No se ha ingresado una consulta", Toast.LENGTH_SHORT).show()
             }
         }
-        }
 
+    }
     private val seleccionarUbicacionARL= registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()){resultado->
         if(resultado.resultCode == Activity.RESULT_OK){

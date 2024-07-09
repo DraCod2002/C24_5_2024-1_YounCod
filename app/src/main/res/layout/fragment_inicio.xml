@@ -25,12 +25,12 @@
             android:drawablePadding="10dp"
             app:drawableEndCompat="@drawable/ic_next"/>
     </com.google.android.material.card.MaterialCardView>
+    <!-- Buscar un Anuncio -->
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="5">
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,6 @@
             app:cardUseCompatPadding="true"
             android:layout_weight="4"
             app:contentPadding="10dp">
-            <!-- Buscar un Anuncio -->
 
             <EditText
                 android:id="@+id/Et_buscar"
@@ -50,17 +49,15 @@
                 android:padding="10dp"/>
 
         </com.google.android.material.card.MaterialCardView>
-
         <ImageButton
             android:id="@+id/Ib_limpiar"
             android:src="@drawable/ic_limpiar_busqueda"
             android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:padding="10dp"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
     <TextView
         android:id="@+id/Txt_categoria"
@@ -84,8 +81,9 @@
         android:id="@+id/anunciosRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_anuncio"
+        tools:listitem="@layout/item_anuncio_nueva_version"
         android:layout_marginTop="5dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
