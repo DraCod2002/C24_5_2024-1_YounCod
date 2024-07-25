@@ -49,3 +49,7 @@ Napp/src/main/java/com/pedro/hernandez/buscam/Adaptadores/AdaptadorCategoria.kt
 Lapp/src/main/java/com/pedro/hernandez/buscam/Adaptadores/AdaptadroAnuncio.kt,6\3\631159c65f30e1c6af5dfc06b816f1443926c339
 u
 Eapp/src/main/java/com/pedro/hernandez/buscam/filtro/FiltrarAnuncio.kt,3\8\388fbda10a7434ff4f1ef76dc0633b560f5d196f
+s
+Capp/src/main/java/com/pedro/hernandez/buscam/RVListenerCategoria.kt,a\b\ab4016ef3309b2b4207271b6237646dd7c774866
+}
+Mapp/src/main/java/com/pedro/hernandez/buscam/DetalleAnuncio/DetalleAnuncio.kt,e\a\eaf1b57f34ac700a8319788ecd29dcddcf5bcf9d

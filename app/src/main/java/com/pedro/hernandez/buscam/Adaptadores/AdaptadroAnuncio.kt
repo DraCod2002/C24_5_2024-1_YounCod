@@ -1,6 +1,7 @@
 package com.pedro.hernandez.buscam.Adaptadores
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.pedro.hernandez.buscam.Constantes
+import com.pedro.hernandez.buscam.DetalleAnuncio.DetalleAnuncio
 import com.pedro.hernandez.buscam.Model.ModeloAnuncio
 import com.pedro.hernandez.buscam.R
 import com.pedro.hernandez.buscam.databinding.ItemAnuncioBinding
@@ -25,13 +27,13 @@ class AdaptadroAnuncio : RecyclerView.Adapter<AdaptadroAnuncio.HolderAnuncio>, F
     private var context : Context
     var anuncioArrayList : ArrayList<ModeloAnuncio>
     private var firebaseAuth : FirebaseAuth
-    private var filtroLista :ArrayList<ModeloAnuncio>
-    private var filtro : FiltrarAnuncio? = null
+    private var filtroLista : ArrayList<ModeloAnuncio>
+    private var filtro : FiltrarAnuncio ?= null
     constructor(context: Context, anuncioArrayList: ArrayList<ModeloAnuncio>) {
         this.context = context
         this.anuncioArrayList = anuncioArrayList
-        firebaseAuth = FirebaseAuth.getInstance()
         this.filtroLista = anuncioArrayList
+        firebaseAuth = FirebaseAuth.getInstance()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderAnuncio {
         binding = ItemAnuncioBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -43,7 +45,7 @@ class AdaptadroAnuncio : RecyclerView.Adapter<AdaptadroAnuncio.HolderAnuncio>, F
     }
 
     override fun onBindViewHolder(holder: HolderAnuncio, position: Int) {
-       val modeloAnuncio = anuncioArrayList[position]
+        val modeloAnuncio = anuncioArrayList[position]
         val titulo = modeloAnuncio.titulo
         val descripcion = modeloAnuncio.descripcion
         val direccion = modeloAnuncio.direccion
@@ -54,12 +56,54 @@ class AdaptadroAnuncio : RecyclerView.Adapter<AdaptadroAnuncio.HolderAnuncio>, F
         val formatoFecha = Constantes.obtenerFecha(tiempo)
 
         cargarPrimeraImgAnuncio(modeloAnuncio, holder)
+        comprobarFavorito(modeloAnuncio,holder)
+
         holder.Tv_titulo.text = titulo
         holder.Tv_descripcion.text = descripcion
         holder.Tv_direccion.text = direccion
         holder.Tv_condicion.text = condicion
         holder. Tv_precio.text = precio
         holder.Tv_fecha.text = formatoFecha
+
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, DetalleAnuncio::class.java)
+            intent.putExtra("idAnuncio",modeloAnuncio.id)
+            context.startActivity(intent)
+        }
+        holder.Ib_fav.setOnClickListener{
+            val favorito = modeloAnuncio.favorito
+
+            if(favorito){
+                //Favorito es igual a true
+                Constantes.eliminarAnuncioFav(context,modeloAnuncio.id)
+            }else {
+                //fav = false
+                Constantes.agregarAnuncioFav(context,modeloAnuncio.id)
+            }
+        }
+    }
+
+    private fun comprobarFavorito(modeloAnuncio: ModeloAnuncio, holder: AdaptadroAnuncio.HolderAnuncio) {
+        val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
+        ref.child(firebaseAuth.uid!!).child("Favoritos").child(modeloAnuncio.id)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val favorito = snapshot.exists()
+                    modeloAnuncio.favorito = favorito
+
+                    if (favorito){
+                        holder.Ib_fav.setImageResource(R.drawable.ic_anuncio_es_favorito)
+                    }else{
+                        holder.Ib_fav.setImageResource(R.drawable.ic_no_favorito)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+
     }
 
     private fun cargarPrimeraImgAnuncio(modeloAnuncio: ModeloAnuncio, holder: AdaptadroAnuncio.HolderAnuncio) {
@@ -101,7 +145,7 @@ class AdaptadroAnuncio : RecyclerView.Adapter<AdaptadroAnuncio.HolderAnuncio>, F
 
     override fun getFilter(): Filter {
         if (filtro == null){
-            filtro = FiltrarAnuncio(this, filtroLista)
+            filtro = FiltrarAnuncio(this,filtroLista)
         }
         return filtro as FiltrarAnuncio
     }

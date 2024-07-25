@@ -30,7 +30,7 @@
     <!--Perlfil de usuario-->
     <string name="Btn_editar_perfil">Editar Perfil</string>
     <string name="Btn_vender">Vender</string>
-    <string name="Tv_nombres">Pedro Hernandez</string>
+    <string name="Tv_nombres">Usuario</string>
     <string name="Txt_informacion">Información</string>
     <string name="Txt_email_info">Email: </string>
     <string name="Tv_email">email@dominio.com</string>
@@ -52,6 +52,37 @@
     <string name="Et_telefono">Ingresa aquí</string>
     <string name="Btn_actualizar">Actualizar</string>
 
+    <!--Item anuncio-->
+    <string name="Tv_titulo">Nombre del producto</string>
+    <string name="Tv_descripcion">Descripción del producto, se podrá visualizar un máximo de 3 líneas</string>
+    <string name="Tv_direccion">Dirección</string>
+    <string name="Tv_condicion">Nuevo</string>
+    <string name="Tv_simbolo_precio">S/</string>
+    <string name="Tv_precio">00</string>
+    <string name="Tv_fecha">dd/MM/yyyy</string>
+
+    <string name="Txt_detalle_info">Detalle del anuncio</string>
+    <string name="Tv_cat">Categoría del anuncio</string>
+    <string name="Txt_titulo">Titulo</string>
+    <string name="Txt_descripcion">Descripción</string>
+    <string name="Tv_descr">Descripción del anuncio</string>
+    <string name="Txt_direccion">Dirección</string>
+    <string name="Txt_vistas">Número de visitas del anuncio: </string>
+    <string name="Tv_vistas">0</string>
+    <string name="Txt_descr_vendedor">Descripción del vendedor</string>
+    <string name="Txt_estado">Estado</string>
+    <string name="Tv_estado">Disponible</string>
+    <string name="Txt_miembro">Miembro desde:</string>
+    <string name="Txt_categoria">Categoria del anuncio</string>
+    <!--Opciones de detalle anuncio-->
+    <string name="Btn_mapa">Mapa</string>
+    <string name="Btn_llamar">Llam.</string>
+    <string name="Btn_sms">SMS</string>
+    <string name="Btn_chat">Chat</string>
+
+    <string name="imagenContadorTv">1/4</string>
+
+
     <!-- Crear anuncio-->
     <string name="Et_marca">Nombre de la marca</string>
     <string name="Categoria">Categoria</string>
@@ -65,18 +96,10 @@
     <!-- Mapas -->
     <string name="Txt_select_ubicacion">Seleccione ubicación</string>
     <string name="Btn_listo">Listo</string>
-    
+
     <!-- Fragmento Inicio -->
     <string name="Tv_locacion">Elija una locación</string>
     <string name="Et_buscar">Buscar </string>
     <string name="Tv_categoria">Categorias</string>
 
-    <!--Item anuncio-->
-    <string name="Tv_titulo">Nombre del producto</string>
-    <string name="Tv_descripcion">Descripción del producto, se podrá visualizar un máximo de 3 lineas</string>
-    <string name="Tv_direccion">Dirección</string>
-    <string name="Tv_condicion">Nuevo</string>
-    <string name="Tv_simbolo_precio">S/</string>
-    <string name="Tv_precio">00</string>
-    <string name="Tv_fecha">dd/MM/yyyy</string>
 </resources>

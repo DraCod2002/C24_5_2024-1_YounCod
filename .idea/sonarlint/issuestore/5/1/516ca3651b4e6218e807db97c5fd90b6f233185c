@@ -1,5 +1,11 @@
 
-Mkotlin:S108’")Either remove or fill this block of code.(ÍÖ¥ºÿÿÿÿÿ8„°µ‡2
-vkotlin:S3776z"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(İ•ôÛøÿÿÿÿ8Í°µ‡2
-vkotlin:S3776~"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(Üıìªÿÿÿÿÿ8Î°µ‡2
-Skotlin:S1066Œ".Merge this "if" statement with the nested one.(ÕÖëŠúÿÿÿÿ8Ù°µ‡2
+Lkotlin:S108U")Either remove or fill this block of code.(ÍÖ¥ºÿÿÿÿÿ8®ŞÍœ‰2
+Mkotlin:S108Ê")Either remove or fill this block of code.(ÍÖ¥ºÿÿÿÿÿ8¯ŞÍœ‰2
+Gkotlin:S108p")Either remove or fill this block of code.(½ûöÆ8¯ŞÍœ‰2
+wkotlin:S3776²"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(İ•ôÛøÿÿÿÿ8¹ŞÍœ‰2
+wkotlin:S3776¶"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(Üıìªÿÿÿÿÿ8ºŞÍœ‰2
+ykotlin:S1186M"ZAdd a nested comment explaining why this function is empty or complete the implementation.(´„˜8½ŞÍœ‰2
+ykotlin:S1186Z"ZAdd a nested comment explaining why this function is empty or complete the implementation.(öÊÌÆ8½ŞÍœ‰2
+ykotlin:S1186h"ZAdd a nested comment explaining why this function is empty or complete the implementation.(Íš¨Ä8½ŞÍœ‰2
+~kotlin:S1186s"ZAdd a nested comment explaining why this function is empty or complete the implementation.(¼”šâüÿÿÿÿ8½ŞÍœ‰2
+Skotlin:S1066Ä".Merge this "if" statement with the nested one.(ÕÖëŠúÿÿÿÿ8¾ŞÍœ‰2

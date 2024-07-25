@@ -15,7 +15,10 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.pedro.hernandez.buscam.Adaptadores.AdaptadorImagenSeleccionada
 import com.pedro.hernandez.buscam.Constantes
@@ -34,6 +37,59 @@ class CrearAnuncio : AppCompatActivity() {
     private var imagenUri : Uri?=null
     private lateinit var imagenSelecArrayList: ArrayList<ModeloImagenSeleccionada>
     private lateinit var adaptadorImagensel: AdaptadorImagenSeleccionada
+    private var Edicion = false
+    private var idAnuncioEditar = ""
+    private fun cargarDetalles() {
+        var ref = FirebaseDatabase.getInstance().getReference("Anuncios")
+        ref.child(idAnuncioEditar)
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    /*Obtener de la BD la información del anunco*/
+                    val marca = "${snapshot.child("marca").value}"
+                    val categoria = "${snapshot.child( "categoria").value}"
+                    val condicion = "${snapshot.child( "condicion").value}"
+                    val locacion = "${snapshot.child( "direccion").value}"
+                    val precio = "${snapshot.child( "precio").value}"
+                    val titulo ="${snapshot.child( "titulo").value}"
+                    val descripcion = "${snapshot.child( "descripcion").value}"
+                    latitud = (snapshot.child( "latitud").value) as Double
+                    longitud = (snapshot.child( "longitud").value) as Double
+
+                    /*Setear la información en las vistas*/
+                    binding.ETMarca.setText(marca)
+                    binding.Categoria.setText(categoria)
+                    binding.Condicion.setText(condicion)
+                    binding. Locacion.setText(locacion)
+                    binding. EtPrecio.setText(precio)
+                    binding. EtTitulo.setText(titulo)
+                    binding. EtDescripcion.setText(descripcion)
+
+                    val refImagenes = snapshot.child("Imagenes").ref
+                    refImagenes.addListenerForSingleValueEvent(object  : ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (ds in snapshot.children){
+                                val id = "${ds.child("imagenUrl").value}"
+                                val imagenUrl = "${ds.child("imagenUrl").value}"
+
+                                val modeloImgSeleccionada = ModeloImagenSeleccionada(id, null, imagenUrl, true)
+                                imagenSelecArrayList.add(modeloImgSeleccionada)
+
+                            }
+                            cargarImagenes()
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCrearAnuncioBinding.inflate(layoutInflater)
@@ -49,6 +105,20 @@ class CrearAnuncio : AppCompatActivity() {
 
         val adaptadorCon = ArrayAdapter(this, R.layout.item_condicion, Constantes.condiciones)
         binding.Condicion.setAdapter(adaptadorCon)
+
+        Edicion = intent.getBooleanExtra("Edicion", false)
+
+        if (Edicion){
+            //True
+            //Llegamos de la actividad detalle anuncio
+            idAnuncioEditar = intent.getStringExtra("idAnuncio") ?: ""
+            cargarDetalles()
+            binding.BtnCrearAnuncio.text = "Actualizar anuncio"
+        }else{
+            //False
+            //LLegando de la actividad Main Activity
+            binding.BtnCrearAnuncio.text = "Crear anuncio                                                                     "
+        }
 
         imagenSelecArrayList = ArrayList()
         cargarImagenes()

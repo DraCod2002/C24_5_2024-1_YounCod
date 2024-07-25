@@ -40,7 +40,7 @@ class SeleccionarUbicacion : AppCompatActivity(), OnMapReadyCallback {
     }
     private var mMap : GoogleMap?=null
 
-    private var mPlceClient : PlacesClient?=null
+    private var mPlaceClient : PlacesClient?=null
 
     private var mFusedLocationProviderClient : FusedLocationProviderClient?=null
 
@@ -53,11 +53,11 @@ class SeleccionarUbicacion : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivitySeleccionarUbicacionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.listoLl.visibility = View.GONE
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.MapFrgament) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.MapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         Places.initialize(this, getString(R.string.mi_google_maps_api_key))
 
-        mPlceClient = Places.createClient(this)
+        mPlaceClient = Places.createClient(this)
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         val autocompleteSupportMapFragment = supportFragmentManager.findFragmentById(R.id.autocompletar_fragment)
         as AutocompleteSupportFragment
@@ -75,7 +75,7 @@ class SeleccionarUbicacion : AppCompatActivity(), OnMapReadyCallback {
                 val latlng = place.latLng
                 selectedLatitude = latlng?.latitude
                 selecTedLongitude = latlng?.longitude
-                direction = place.address?:""
+                direction = place.address?: ""
 
                 agregarMarcador(latlng, name, direction)
             }
@@ -104,12 +104,12 @@ class SeleccionarUbicacion : AppCompatActivity(), OnMapReadyCallback {
     private fun elegirLugarActual(){
         if(mMap == null){
             return
-            detectAndShowDiviceLocationMap()
+            detectAndShowDeviceLocationMap()
         }
     }
 
     @SuppressLint("MissingPermission")
-    private fun detectAndShowDiviceLocationMap(){
+    private fun detectAndShowDeviceLocationMap(){
         try {
             val locationResult = mFusedLocationProviderClient!!.lastLocation
             locationResult.addOnSuccessListener {location->

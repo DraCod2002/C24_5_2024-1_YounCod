@@ -1,0 +1,11 @@
+
+Ukotlin:S1172^"8Use "_" instead of this unused lambda parameter "which".(Ì‹Æãþÿÿÿÿ
+Jkotlin:S1172["2Use "_" instead of these unused lambda parameters.(Ûíû¸
+pkotlin:S117™"SRename this local variable to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(à²Êîþÿÿÿÿ
+kkotlin:S117›"SRename this local variable to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(•í×Ï
+Rkotlin:S1144û"9Remove this unused private "marcarAnuncioVendido" method.(ÀÚ–±
+Fkotlin:S108ï")Either remove or fill this block of code.(ÍÖ¥ºÿÿÿÿÿ
+Fkotlin:S108§")Either remove or fill this block of code.(ÍÖ¥ºÿÿÿÿÿ
+Fkotlin:S108Á")Either remove or fill this block of code.(ÍÖ¥ºÿÿÿÿÿ
+rkotlin:S1192õ"TDefine a constant instead of duplicating this literal "Not yet implemented" 4 times.(÷ã¦œÿÿÿÿÿ
+okotlin:S37760"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¶Á»¬þÿÿÿÿ

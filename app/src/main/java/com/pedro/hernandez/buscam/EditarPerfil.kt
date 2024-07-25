@@ -248,38 +248,38 @@ class EditarPerfil : AppCompatActivity() {
 
     private val resultadoCamara_ARL =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){resultado->
-           if(resultado.resultCode == Activity.RESULT_OK){
+            if(resultado.resultCode == Activity.RESULT_OK){
                 subirImagenStorage()
-               /*try {
-                   Glide.with(this)
-                       .load(imageUri)
-                       .placeholder(R.drawable.perfil)
-                       .into(binding.imgPerfil)
-               }catch (e:Exception){
+                /*try {
+                    Glide.with(this)
+                        .load(imageUri)
+                        .placeholder(R.drawable.perfil)
+                        .into(binding.imgPerfil)
+                }catch (e:Exception){
 
-               }*/
-           }else{
-               Toast.makeText(
-                   this,
-                   "Cancelado",
-                   Toast.LENGTH_SHORT
-               ).show()
-           }
+                }*/
+            }else{
+                Toast.makeText(
+                    this,
+                    "Cancelado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
         }
     private val concederPermisoAlmacenamiento =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { esConcedido ->
-                if (esConcedido){
-                    imagenGaleria()
-                }else{
-                    Toast.makeText(
-                        this,
-                        "El permiso por almacenamiento ha sido denegada",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
+            if (esConcedido){
+                imagenGaleria()
+            }else{
+                Toast.makeText(
+                    this,
+                    "El permiso por almacenamiento ha sido denegada",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+
+        }
 
     private fun imagenGaleria() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -310,5 +310,3 @@ class EditarPerfil : AppCompatActivity() {
             }
         }
 }
-
-
