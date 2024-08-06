@@ -1,6 +1,7 @@
 package com.pedro.hernandez.buscam.DetalleAnuncio
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -13,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -21,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.pedro.hernandez.buscam.Adaptadores.AdaptadorImgSlider
 import com.pedro.hernandez.buscam.Constantes
+import com.pedro.hernandez.buscam.DetalleVendedor.DetalleVendedor
 import com.pedro.hernandez.buscam.MainActivity
 import com.pedro.hernandez.buscam.Model.ModeloAnuncio
 import com.pedro.hernandez.buscam.Model.ModeloImgSlider
@@ -134,7 +137,12 @@ class DetalleAnuncio : AppCompatActivity() {
 
         }
 
-
+        binding.IvInfoVendedor.setOnClickListener {
+            val intent = Intent(this, DetalleVendedor::class.java)
+            intent.putExtra("uidVendedor", uidVendedor)
+            Toast.makeText(this,"El uid del vendedor es ${uidVendedor}",Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+        }
     }
 
     private fun opcionesDialog() {
@@ -156,6 +164,7 @@ class DetalleAnuncio : AppCompatActivity() {
                 startActivity(intent)
             }else if (itemId == 1){
                 //Marcar como vendido
+                dialogMarcarVendido()
             }
 
             return@setOnMenuItemClickListener true
@@ -267,6 +276,25 @@ class DetalleAnuncio : AppCompatActivity() {
                     Toast.LENGTH_SHORT)
                     .show()
             }
+    }
+    private fun dialogMarcarVendido(){
+        val Btn_si: MaterialButton
+        val Btn_no: MaterialButton
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.cuadro_d_marcar_vendido)
+
+        Btn_si = dialog.findViewById(R.id.Btn_si)
+        Btn_no = dialog.findViewById(R.id.Btn_no)
+
+        Btn_si.setOnClickListener {
+            marcarAnuncioVendido()
+            dialog.dismiss()
+        }
+        Btn_no.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
     }
 
     private fun cargarInfoVendedor() {

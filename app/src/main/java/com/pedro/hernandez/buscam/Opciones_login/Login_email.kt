@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.pedro.hernandez.buscam.MainActivity
 import com.pedro.hernandez.buscam.R
+import com.pedro.hernandez.buscam.RecuperarPassword
 import com.pedro.hernandez.buscam.Registro_email
 import com.pedro.hernandez.buscam.databinding.ActivityLoginEmailBinding
 
@@ -33,6 +34,9 @@ class Login_email : AppCompatActivity() {
         }
         binding.TxtRegistrarme.setOnClickListener{
             startActivity(Intent(this@Login_email, Registro_email::class.java))
+        }
+        binding.TvRecuperar.setOnClickListener {
+            startActivity(Intent(this@Login_email, RecuperarPassword::class.java))
         }
     }
     private var email = ""

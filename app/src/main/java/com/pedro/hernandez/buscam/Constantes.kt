@@ -19,7 +19,7 @@ object Constantes {
         "Móbiles",
         "Computo",
         "Electrónica",
-        "Vehículoes",
+        "Vehículos",
         "Consolas",
         "Muebles",
         "Belleza",

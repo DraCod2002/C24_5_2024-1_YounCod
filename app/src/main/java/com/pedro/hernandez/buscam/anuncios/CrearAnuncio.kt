@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.pedro.hernandez.buscam.Adaptadores.AdaptadorImagenSeleccionada
 import com.pedro.hernandez.buscam.Constantes
+import com.pedro.hernandez.buscam.MainActivity
 import com.pedro.hernandez.buscam.Model.ModeloImagenSeleccionada
 import com.pedro.hernandez.buscam.R
 import com.pedro.hernandez.buscam.SeleccionarUbicacion
@@ -58,7 +59,9 @@ class CrearAnuncio : AppCompatActivity() {
                     /*Setear la información en las vistas*/
                     binding.ETMarca.setText(marca)
                     binding.Categoria.setText(categoria)
+                    binding.Categoria.isEnabled = false
                     binding.Condicion.setText(condicion)
+                    binding.Condicion.isEnabled = false
                     binding. Locacion.setText(locacion)
                     binding. EtPrecio.setText(precio)
                     binding. EtTitulo.setText(titulo)
@@ -178,14 +181,54 @@ class CrearAnuncio : AppCompatActivity() {
         else if (descripcion.isEmpty()) {
             binding.EtDescripcion.error = "Ingrese una condicion"
             binding.Condicion.requestFocus()
-        }
-        else if (imagenUri == null){
-           Toast.makeText(this, "Agregue almenos una imagen",
-            Toast.LENGTH_SHORT).show()
         }else{
-            agregarAnuncio()
+            if(Edicion){
+                //True
+                actualizarAnuncio()
+            }else{
+                //False
+                if (imagenUri == null) {
+                    Toast.makeText(
+                        this, "Agregue almenos una imagen",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }else{
+                    agregarAnuncio()
+                }
+
+            }
         }
 
+
+    }
+
+    private fun actualizarAnuncio() {
+        progressDialog.setMessage("Actualizando anuncio")
+        progressDialog.show()
+        val hashMap = HashMap<String, Any>()
+        hashMap["uid"] = "${firebaseAuth.uid}"
+        hashMap["marca"] = "${marca}"
+        hashMap["categoria"] = "${categoria}"
+        hashMap["condicion"] = "${condicion}"
+        hashMap["direccion"] = "${direccion}"
+        hashMap["precio"] = "${precio}"
+        hashMap["titulo"] = "${titulo}"
+        hashMap["descripcion"] = "${descripcion}"
+        hashMap["latitud"] = latitud
+        hashMap["longitud"] = longitud
+
+        val ref = FirebaseDatabase.getInstance().getReference("Anuncios")
+        ref.child(idAnuncioEditar)
+            .updateChildren(hashMap)
+            .addOnSuccessListener {
+                cargarImagenesStorage(idAnuncioEditar)
+            }
+            .addOnFailureListener {e->
+                progressDialog.dismiss()
+                Toast.makeText(
+                    this, "Fallo la actualización", Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 
     private val seleccionarUbicacion_ARL =
@@ -230,6 +273,7 @@ class CrearAnuncio : AppCompatActivity() {
         ref.child(keyId!!)
             .setValue(hashMap)
             .addOnSuccessListener {
+                progressDialog.dismiss()
                 cargarImagenesStorage(keyId)
             }
             .addOnFailureListener{e->
@@ -242,38 +286,50 @@ class CrearAnuncio : AppCompatActivity() {
     private fun cargarImagenesStorage(keyId : String){
         for (i in imagenSelecArrayList.indices){
             val modeloImagenSel = imagenSelecArrayList[i]
-            val nombreImagen = modeloImagenSel.id
-            val rutaNombreImagen = "Anuncios/$nombreImagen"
+            if(!modeloImagenSel.deInternet){
+                val nombreImagen = modeloImagenSel.id
+                val rutaNombreImagen = "Anuncios/$nombreImagen"
+                val storageReference = FirebaseStorage.getInstance().getReference(rutaNombreImagen)
+                storageReference.putFile(modeloImagenSel.imagenUri!!)
+                    .addOnSuccessListener { taskSnaphot->
+                        val uriTask = taskSnaphot.storage.downloadUrl
+                        while (!uriTask.isSuccessful);
+                        val urlImgCargada = uriTask.result
 
-            val storageReference = FirebaseStorage.getInstance().getReference(rutaNombreImagen)
-            storageReference.putFile(modeloImagenSel.imagenUri!!)
-                .addOnSuccessListener { taskSnaphot->
-                    val uriTask = taskSnaphot.storage.downloadUrl
-                    while (!uriTask.isSuccessful);
-                    val urlImgCargada = uriTask.result
+                        if(uriTask.isSuccessful){
+                            val hasMap = HashMap<String, Any>()
+                            hasMap["id"] = "${modeloImagenSel.id}"
+                            hasMap["imagenUrl"] = "$urlImgCargada"
 
-                    if(uriTask.isSuccessful){
-                        val hasMap = HashMap<String, Any>()
-                        hasMap["imagenUrl"] = "$urlImgCargada"
+                            val ref =  FirebaseDatabase.getInstance().getReference("Anuncios")
+                            ref.child(keyId).child("Imagenes")
+                                .child(nombreImagen)
+                                .updateChildren(hasMap)
+                        }
+                        if(Edicion){
+                            progressDialog.dismiss()
+                            val intent = Intent(this@CrearAnuncio, MainActivity::class.java)
+                            startActivity(intent)
+                            Toast.makeText(this, "Se actualizo la informació del anuncio", Toast.LENGTH_SHORT).show()
+                            finishAffinity()
+                        }else{
+                            progressDialog.dismiss()
 
-                        val ref =  FirebaseDatabase.getInstance().getReference("Anuncios")
-                        ref.child(keyId).child("Imagenes")
-                            .child(nombreImagen)
-                            .updateChildren(hasMap)
+                            Toast.makeText(this,
+                                "Se publico su anuncio",
+                                Toast.LENGTH_SHORT).show()
+                            limpiarCampos()
+                        }
+
+
                     }
-                    progressDialog.dismiss()
+                    .addOnFailureListener{e->
+                        Toast.makeText(
+                            this, "${e.message}", Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
 
-                    Toast.makeText(this,
-                        "Se publico su anuncio",
-                        Toast.LENGTH_SHORT).show()
-                    limpiarCampos()
-
-                }
-                .addOnFailureListener{e->
-                    Toast.makeText(
-                        this, "${e.message}", Toast.LENGTH_SHORT
-                    ).show()
-                }
         }
     }
     private fun limpiarCampos(){
@@ -406,7 +462,7 @@ class CrearAnuncio : AppCompatActivity() {
         }
 
     private fun cargarImagenes() {
-        adaptadorImagensel = AdaptadorImagenSeleccionada(this, imagenSelecArrayList)
+        adaptadorImagensel = AdaptadorImagenSeleccionada(this, imagenSelecArrayList,idAnuncioEditar)
         binding.RVImagenes.adapter = adaptadorImagensel
     }
 }
