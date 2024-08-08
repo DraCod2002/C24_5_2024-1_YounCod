@@ -7,6 +7,7 @@ import android.text.format.DateFormat
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Arrays
 import java.util.Calendar
 import java.util.Locale
 
@@ -123,5 +124,10 @@ object Constantes {
         intent.setData(Uri.parse("smsto:$tel"))
         intent.putExtra("sms_body", "")
         context.startActivity(intent)
+    }
+    fun rutaChat(receptorUid: String, emisorUid:String): String{
+        val arrayUid = arrayOf(receptorUid, emisorUid)
+        Arrays.sort(arrayUid)
+        return "${arrayUid[0]}_${arrayUid[1]}"
     }
 }

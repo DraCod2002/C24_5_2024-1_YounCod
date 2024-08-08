@@ -29,6 +29,7 @@ import com.pedro.hernandez.buscam.Model.ModeloAnuncio
 import com.pedro.hernandez.buscam.Model.ModeloImgSlider
 import com.pedro.hernandez.buscam.R
 import com.pedro.hernandez.buscam.anuncios.CrearAnuncio
+import com.pedro.hernandez.buscam.chat.ChatActivity
 import com.pedro.hernandez.buscam.databinding.ActivityDetalleAnuncioBinding
 import java.util.HashMap
 
@@ -136,7 +137,11 @@ class DetalleAnuncio : AppCompatActivity() {
             }
 
         }
-
+        binding.BtnChat.setOnClickListener{
+            val intent = Intent(this, ChatActivity::class.java);
+            intent.putExtra("uidVendedor", uidVendedor);
+            startActivity(intent);
+        }
         binding.IvInfoVendedor.setOnClickListener {
             val intent = Intent(this, DetalleVendedor::class.java)
             intent.putExtra("uidVendedor", uidVendedor)

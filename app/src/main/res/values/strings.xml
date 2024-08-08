@@ -74,8 +74,6 @@
     <string name="Tv_estado">Disponible</string>
     <string name="Txt_miembro">Miembro desde:</string>
     <string name="Txt_categoria">Categoria del anuncio</string>
-    
-    
 
 
     <!--Opciones de detalle anuncio-->
@@ -144,4 +142,10 @@
 
     <!-- CD marcar Vendido -->
     <string name="Txt_marcar_vendido">¿Marcar como vendido el producto?</string>
+
+
+    <!-- Chat -->
+    <string name="Txt_nombre_vendedor_chat">Nombre del vendedor</string>
+    <string name="Et_mensaje_chat">Escriba algo</string>
+    <string name="Tv_tiempo_mensaje">dd/MM/yyyy hh:mm</string>
 </resources>
