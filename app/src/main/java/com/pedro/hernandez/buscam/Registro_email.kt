@@ -85,7 +85,7 @@ class Registro_email : AppCompatActivity() {
 
     private fun llenarInfoBD(){
         progreDoalog.setMessage("Guardando información")
-        val tiempo = Constantes.ontenerTiempoDis()
+        val tiempo = Constantes.obtenerTiempoDis()
         val emailUsuario = firebaseAuth.currentUser!!.email
         val uidUsuario = firebaseAuth.uid
 
@@ -97,7 +97,7 @@ class Registro_email : AppCompatActivity() {
         hashMap["proveedor"] = "Email"
         hashMap["escribiendo"] = ""
         hashMap["tiempo"] = tiempo
-        hashMap["online"] =  true
+        hashMap["estado"] =  "online"
         hashMap["email"] = "${emailUsuario}"
         hashMap["uid"] = "${uidUsuario}"
         hashMap["fecha_nac"] = ""

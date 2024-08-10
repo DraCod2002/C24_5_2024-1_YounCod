@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,6 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import com.pedro.hernandez.buscam.CambiarPassword
 import com.pedro.hernandez.buscam.Constantes
 import com.pedro.hernandez.buscam.EditarPerfil
+import com.pedro.hernandez.buscam.Eliminar_cuenta
 import com.pedro.hernandez.buscam.OpcionesLogin
 import com.pedro.hernandez.buscam.R
 import com.pedro.hernandez.buscam.anuncios.CrearAnuncio
@@ -61,6 +63,21 @@ class FragmentPerfil : Fragment() {
         binding.BtnVender.setOnClickListener{
             startActivity(Intent(mContext, CrearAnuncio::class.java))
         }
+        binding.BtnEliminarAnuncios.setOnClickListener {
+            val alertDialog = MaterialAlertDialogBuilder(mContext)
+            alertDialog.setTitle("Eliminar todos mis anuncios")
+                .setMessage("¿Estás seguro(a) de eliminar todos tus anuncios?")
+                .setPositiveButton("Eliminar"){dialog, which->
+                    eliminarTodosMiAnuncios()
+                }
+                .setNegativeButton("Cancelar"){dialog, which->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+        binding.BtnEliminarCuenta.setOnClickListener {
+            startActivity(Intent(mContext, Eliminar_cuenta::class.java))
+        }
         binding.BtnCerrarSesion.setOnClickListener{
             firebaseAuth.signOut()
             startActivity(Intent(mContext, OpcionesLogin::class.java))
@@ -92,7 +109,23 @@ class FragmentPerfil : Fragment() {
             }
 
         }
+    private fun eliminarTodosMiAnuncios() {
+        val miUid = firebaseAuth.uid
+        val ref = FirebaseDatabase.getInstance().getReference("Anuncios").orderByChild("uid").equalTo(miUid)
+        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (ds in snapshot.children){
+                    ds.ref.removeValue()
+                }
 
+                Toast.makeText(mContext, "Se han eliminado todos sus anuncios",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
     private fun leerInfo() {
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child("${firebaseAuth.uid}")

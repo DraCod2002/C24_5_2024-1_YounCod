@@ -51,6 +51,11 @@
     <string name="Et_f_nac">Ingresa aquí</string>
     <string name="Et_telefono">Ingresa aquí</string>
     <string name="Btn_actualizar">Actualizar</string>
+    <string name="Btn_eliminar_cuenta">Eliminar Cuenta</string>
+    <string name="Btn_eliminar_anuncios">Eliminar Anuncios</string>
+    <string name="Txt_eliminar_cuenta">Eliminar Cuenta</string>
+    <string name="Txt_mensaje_eliminar">¿Estas segur@ que deseas eliminar esta cuenta? Esta acciòn no se puede deshacer</string>
+    <string name="Btn_eliminar_mi_cuenta">Eliminar mi cuenta</string>
 
     <!--Item anuncio-->
     <string name="Tv_titulo">Nombre del producto</string>
@@ -146,6 +151,8 @@
 
     <!-- Chat -->
     <string name="Txt_nombre_vendedor_chat">Nombre del vendedor</string>
+    <string name="Txt_estado_chat">Online</string>
     <string name="Et_mensaje_chat">Escriba algo</string>
     <string name="Tv_tiempo_mensaje">dd/MM/yyyy hh:mm</string>
+    <string name="Btn_cerrar_visualizador">Cerrar</string>
 </resources>

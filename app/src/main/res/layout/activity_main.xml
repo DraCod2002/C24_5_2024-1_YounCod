@@ -10,12 +10,14 @@
 
     <RelativeLayout
         android:id="@+id/ToolbarRl"
+        android:background="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="@dimen/m_toolbar_height">
 
         <TextView
             android:id="@+id/TituloRl"
             android:text="@string/TituloRl"
+            android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="17sp"
             android:layout_width="wrap_content"

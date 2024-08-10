@@ -76,42 +76,59 @@
 
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
-        <!--Fecha de nacimiento-->
-        <RelativeLayout
-            android:id="@+id/Txt_f_nac"
+
+        <TextView
+            android:text="@string/Txt_f_nac"
+            android:layout_below="@+id/Txt_nombres_c"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="start"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+
+            android:id="@+id/LL_calendario"
+            android:layout_below="@id/Txt_nombres_c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/Txt_nombres_c">
-            <TextView
-                android:text="@string/Txt_f_nac"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_width="wrap_content"
-                android:layout_gravity="start"
-                android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
 
+            <ImageView
+                android:id="@+id/Iv_abrir_cal"
+                android:layout_gravity="center"
+                android:src="@drawable/calendario"
+                android:layout_marginEnd="7dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <!--Fecha de nac-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TIL_Nac"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_below="@+id/TILNombres"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxCornerRadiusBottomEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusTopStart="8dp">
+                app:boxCornerRadiusBottomStart="8dp">
+
                 <EditText
                     android:id="@+id/Et_f_nac"
                     android:hint="@string/Et_f_nac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
+
             </com.google.android.material.textfield.TextInputLayout>
-        </RelativeLayout>
-        <!--Telefono-->
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    <!--Telefono-->
         <RelativeLayout
             android:id="@+id/Rl_Cod_Tel"
-            android:layout_below="@id/Txt_f_nac"
+            android:layout_below="@id/LL_calendario"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

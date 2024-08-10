@@ -250,7 +250,7 @@ class CrearAnuncio : AppCompatActivity() {
         progressDialog.setMessage("Agregando anuncio")
         progressDialog.show()
 
-        val tiempo =  Constantes.ontenerTiempoDis()
+        val tiempo =  Constantes.obtenerTiempoDis()
 
         val ref = FirebaseDatabase.getInstance().getReference("Anuncios")
 
@@ -399,7 +399,7 @@ class CrearAnuncio : AppCompatActivity() {
             if(resultado.resultCode == Activity.RESULT_OK){
                 val data = resultado.data
                 imagenUri = data!!.data
-                val tiempo = "${Constantes.ontenerTiempoDis()}"
+                val tiempo = "${Constantes.obtenerTiempoDis()}"
                 val modeloImgSel = ModeloImagenSeleccionada(
                     tiempo, imagenUri, null, false
                 )
@@ -445,7 +445,7 @@ class CrearAnuncio : AppCompatActivity() {
     private val resultadoCamara_ARL =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){resultado->
             if(resultado.resultCode == Activity.RESULT_OK){
-                val tiempo = "${Constantes.ontenerTiempoDis()}"
+                val tiempo = "${Constantes.obtenerTiempoDis()}"
                 val modeloImgSel = ModeloImagenSeleccionada(
                     tiempo, imagenUri, null, false
                 )

@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.pedro.hernandez.buscam.Model.ModeloImgSlider
 import com.pedro.hernandez.buscam.R
@@ -51,6 +53,9 @@ class AdaptadorImgSlider : RecyclerView.Adapter<AdaptadorImgSlider.HolderImagenS
         }catch (e:Exception){
 
         }
+        holder.itemView.setOnClickListener{
+            visualizadorImagen(modeloImagenSlider.imagenUrl)
+        }
 
     }
     inner class HolderImagenSlider(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -58,5 +63,33 @@ class AdaptadorImgSlider : RecyclerView.Adapter<AdaptadorImgSlider.HolderImagenS
         var imagenContadorTv : TextView = binding.imagenContadorTv
     }
 
+    private fun visualizadorImagen(imagen : String){
+        val Pv : PhotoView
+        val Btn_cerrar : MaterialButton
+
+        val dialog = Dialog(context)
+
+        dialog.setContentView(R.layout.cuadro_d_visualizador_img)
+
+        Pv = dialog.findViewById(R.id.Pv_img)
+        Btn_cerrar = dialog.findViewById(R.id.Btn_cerrar_visualizador)
+
+
+        try {
+            Glide.with(context)
+                .load(imagen)
+                .placeholder(R.drawable.imagen_chat)
+                .into(Pv)
+        }catch (e: Exception){
+
+        }
+
+        Btn_cerrar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
+    }
 
 }

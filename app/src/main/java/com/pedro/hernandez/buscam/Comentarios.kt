@@ -108,7 +108,7 @@ class Comentarios : AppCompatActivity() {
         progressDialog.setMessage("Agregando comentario")
         progressDialog.show()
 
-        val tiempo = "${Constantes.ontenerTiempoDis()}"
+        val tiempo = "${Constantes.obtenerTiempoDis()}"
 
         val hashMap = HashMap<String, Any> ()
         hashMap["id"] = "$tiempo"

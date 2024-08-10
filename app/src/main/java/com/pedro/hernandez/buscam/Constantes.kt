@@ -14,7 +14,10 @@ import java.util.Locale
 object Constantes {
     const val anuncio_disponible = "Disponible"
     const val anuncio_vendido = "Vendido"
-
+    const val MENSAJE_TIPO_TEXTO = "TEXTO"
+    const val MENSAJE_TIPO_IMAGEN = "IMAGEN"
+    const val NOTIFICACION_DE_NUEVO_MENSAJE = "NOTIFICACION DE NUEVO MENSAJE"
+    const val FCM_SERVER_KEY = "pegar clave capitulo 112"
     val categorias = arrayOf(
         "Todos",
         "Móbiles",
@@ -50,7 +53,7 @@ object Constantes {
         "Usado",
         "Renovado"
     )
-    fun ontenerTiempoDis() : Long{
+    fun obtenerTiempoDis() : Long{
         return System.currentTimeMillis()
     }
     fun obtenerFecha(tiempo : Long) : String{
@@ -59,9 +62,14 @@ object Constantes {
 
         return DateFormat.format("dd/MM/yyyy", calendario).toString()
     }
+    fun obtenerFechaHora(tiempo: Long) : String{
+        val calendario = Calendar.getInstance(Locale.ENGLISH)
+        calendario.timeInMillis = tiempo
+        return DateFormat.format("dd/MM/yyyy hh:mm:a", calendario).toString()
+    }
     fun agregarAnuncioFav (context : Context, idAnuncio : String){
         val firebaseAuth = FirebaseAuth.getInstance()
-        val tiempo = Constantes.ontenerTiempoDis()
+        val tiempo = Constantes.obtenerTiempoDis()
 
         val hashMap = HashMap<String, Any>()
         hashMap["idAnuncio"] = idAnuncio

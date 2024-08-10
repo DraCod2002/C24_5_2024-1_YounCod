@@ -87,7 +87,7 @@ class OpcionesLogin : AppCompatActivity() {
 
     private fun llenarInfoBD() {
         progressDialog.setMessage("Guardando información")
-        val tiempo = Constantes.ontenerTiempoDis()
+        val tiempo = Constantes.obtenerTiempoDis()
         val emailUsuario = firebaseAuth.currentUser!!.email
         val uidUsuario = firebaseAuth.uid
         val nombreUsuario = firebaseAuth.currentUser?.displayName
@@ -100,7 +100,7 @@ class OpcionesLogin : AppCompatActivity() {
         hashMap["proveedor"] = "Email"
         hashMap["escribiendo"] = ""
         hashMap["tiempo"] = tiempo
-        hashMap["online"] =  true
+        hashMap["estado"] =  "online"
         hashMap["email"] = "${emailUsuario}"
         hashMap["uid"] = "${uidUsuario}"
         hashMap["fecha_nac"] = ""
