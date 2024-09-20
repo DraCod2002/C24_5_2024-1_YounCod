@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -60,7 +61,7 @@ class DetalleAnuncio : AppCompatActivity() {
         binding.BtnLlamar.visibility = View.GONE
         binding.BtnSms.visibility = View.GONE
         binding.BtnChat.visibility = View.GONE
-
+        binding.BtnDenuncia.visibility = View.GONE
         firebaseAuth = FirebaseAuth.getInstance()
 
         idAnuncio = intent.getStringExtra("idAnuncio").toString()
@@ -148,6 +149,12 @@ class DetalleAnuncio : AppCompatActivity() {
             Toast.makeText(this,"El uid del vendedor es ${uidVendedor}",Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
+        binding.BtnDenuncia.setOnClickListener{
+            val url = "https://forms.gle/pitpYA73qXorxeHR9";
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent);
+        }
     }
 
     private fun opcionesDialog() {
@@ -225,6 +232,7 @@ class DetalleAnuncio : AppCompatActivity() {
                             binding.BtnLlamar.visibility = View.VISIBLE
                             binding.BtnSms.visibility = View.VISIBLE
                             binding.BtnChat.visibility = View.VISIBLE
+                            binding.BtnDenuncia.visibility = View.VISIBLE
 
                             binding.TxtDescrVendedor.visibility = View.VISIBLE
                             binding.perfilVendedor.visibility = View.VISIBLE

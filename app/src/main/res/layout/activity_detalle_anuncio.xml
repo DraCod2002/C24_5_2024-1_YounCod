@@ -346,8 +346,9 @@
                     app:icon="@drawable/ic_locacion"
                     app:iconGravity="top"
                     android:textAllCaps="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
                 <!--Llamadas telefónicas-->
                 <com.google.android.material.button.MaterialButton
@@ -359,8 +360,9 @@
                     app:icon="@drawable/ic_llamar"
                     app:iconGravity="top"
                     android:textAllCaps="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
                 <!--Envio de sms-->
                 <com.google.android.material.button.MaterialButton
@@ -372,8 +374,9 @@
                     app:icon="@drawable/ic_sms"
                     app:iconGravity="top"
                     android:textAllCaps="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
                 <!--Chat-->
                 <com.google.android.material.button.MaterialButton
@@ -385,8 +388,23 @@
                     app:icon="@drawable/ic_chat"
                     app:iconGravity="top"
                     android:textAllCaps="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <!--Denunciar pubblicaciòn-->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Btn_denuncia"
+                    android:text="@string/Btn_denuncia"
+                    android:layout_marginEnd="2dp"
+                    android:textSize="12sp"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_denuncia"
+                    app:iconGravity="top"
+                    android:textAllCaps="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
